@@ -1,0 +1,5 @@
+AppX ${application.version}
+
+${spring-boot.version}
+
+${application.title}
