@@ -73,6 +73,11 @@ public class Catalogue extends BaseEntity implements Serializable {
 	@Column(name = "STATUS", length = 20)
 	private String status = "ACTIVE";
 
+	private String series ;
+
+	
+	
+	
 	public Catalogue() {
 	}
 
@@ -142,6 +147,20 @@ public class Catalogue extends BaseEntity implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hashCode(getId(), getDescription(),  getStatus());
+	}
+
+	/**
+	 * @return the series
+	 */
+	public String getSeries() {
+		return series;
+	}
+
+	/**
+	 * @param series the series to set
+	 */
+	public void setSeries(String series) {
+		this.series = series;
 	}
 
 

@@ -43,7 +43,6 @@ public class RuleServiceTest extends Assert {
 		String rule = new String("s.firstNumber=1;s.totalCount=10;s.x = s.x * s.x ;");
 		List<Integer> result = ruleService.getNumberSeries(rule);
 		LOGGER.debug(result.toString());
-
 	}
 
 	

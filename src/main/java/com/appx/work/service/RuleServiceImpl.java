@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.common.AppConstants;
+import com.appx.work.domain.Catalogue;
 
 /**
  * @author 115750
@@ -34,6 +35,8 @@ public class RuleServiceImpl implements RuleService {
 	@Autowired
 	UtilityFunctionService service;
 
+	@Autowired
+	AppxService appxService;
 	/**
 	 * 
 	 */
@@ -117,6 +120,18 @@ public class RuleServiceImpl implements RuleService {
 			LOGGER.debug(resultMap.toString());
 
 		}
+		
+		if ( numberList.size() > 0 ) {
+			Catalogue cat = new Catalogue();
+			cat.setDescription(rule);
+			cat.setSeries(numberList.toString());
+			appxService.addCatalogue(cat);
+		}
+		
+		
+		
+		
+		
 		return numberList;
 	}
 
