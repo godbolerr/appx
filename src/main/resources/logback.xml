@@ -29,6 +29,7 @@
 
   </appender>
 
+<logger name="com.appx.work" level="DEBUG" />
   <logger name="org.hibernate.type" level="INFO" />
   <logger name="org.hibernate" level="INFO" />
   <!-- <logger name="org.springframework.context.annotation" level="DEBUG" /> -->

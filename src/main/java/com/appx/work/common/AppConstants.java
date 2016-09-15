@@ -4,10 +4,7 @@ public class AppConstants {
 	
 	public static final String SCHEMA_TYPE_SOURCE = "S";
 	public static final String SCHEMA_TYPE_TARGET = "T";
-	public static final String INFORMATICA_COMMAND_SET_CONFIG = "informatica.informaticaconfig.command";
-	public static final String INFORMATICA_COMMAND_EXEC = "informatica.informaticaexec.command";
-	public static final String INFORMATICA_COMMAND_SET_CONFIG_VALIDATERULE = "informatica.validateRule.command";
-	public static final String INFORMATICA_HOUSEKEEP_COMMAND = "informatica.housekeep.command";
+
 
 	
 	public static final String FRM_HOME = "FRM_HOME";

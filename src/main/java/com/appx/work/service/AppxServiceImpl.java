@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.appx.work.domain.Catalogue;
 import com.appx.work.repository.CatalogueRepository;
+import com.appx.work.to.NumberSeriesInput;
+import com.appx.work.to.NumberSeriesResult;
 
 /**
  * @author 115750
@@ -65,5 +67,25 @@ public class AppxServiceImpl implements AppxService {
 	@Override
 	public Page<Catalogue> getPagedCatalogues(Pageable pageable) {
 		return catRepo.findAll(pageable);
+	}
+
+	@Override
+	public NumberSeriesResult getSeries(NumberSeriesInput input) {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
