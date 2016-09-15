@@ -5,11 +5,13 @@ package com.appx.work.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.domain.Catalogue;
+import com.appx.work.repository.CatalogueRepository;
 
 /**
  * @author 115750
@@ -17,6 +19,9 @@ import com.appx.work.domain.Catalogue;
  */
 @Service
 public class AppxServiceImpl implements AppxService {
+
+	@Autowired
+	private CatalogueRepository catRepo;
 
 	/**
 	 * 
@@ -27,48 +32,38 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public Catalogue addCatalogue(Catalogue catalogue) {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.save(catalogue);
 	}
 
 	@Override
 	public Catalogue updateCatalogue(Catalogue catalogue) {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.save(catalogue);
 	}
 
 	@Override
 	public Catalogue getCatalogueById(Long catalogueId) {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.findOne(catalogueId);
 	}
 
 	@Override
 	public Catalogue getCatalogueByName(String catalogueName) {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.findByName(catalogueName);
 	}
 
 	@Override
 	public boolean deleteCatalogue(Long catalogueId) {
-		// TODO Auto-generated method stub
-		return false;
+		Catalogue cat = catRepo.getOne(catalogueId);
+		catRepo.delete(cat);
+		return true;
 	}
 
 	@Override
 	public List<Catalogue> getCatalogues() {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.findAll();
 	}
 
 	@Override
 	public Page<Catalogue> getPagedCatalogues(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
+		return catRepo.findAll(pageable);
 	}
-
-	/* (non-Javadoc)
-	 * @see com.appx.work.service.AppxService#createEntity(java.lang.String)
-	 */
-	
 }

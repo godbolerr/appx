@@ -63,27 +63,6 @@ public class Catalogue extends BaseEntity implements Serializable {
 	@Column(name = "NAME", length = 100)
 	private String name;
 
-	@NotNull(message = "{error.catalogue.catalogueName.null}")
-	@NotEmpty(message = "{error.catalogue.catalogueName.empty}")
-	@Size(max = 100, message = "{error.catalogue.catalogueName.max}")
-	@Column(name = "CATALOGUENAME", length = 100)
-	private String catalogueName;
-
-	/**
-	 * @return the catalogueName
-	 */
-	public String getCatalogueName() {
-		return catalogueName;
-	}
-
-	/**
-	 * @param catalogueName
-	 *            the catalogueName to set
-	 */
-	public void setCatalogueName(String catalogueName) {
-		this.catalogueName = catalogueName;
-	}
-
 	@Size(max = 250, message = "{error.catalogue.desc.max}")
 	@Column(name = "DESCRIPTION", length = 250)
 	private String description;
@@ -92,13 +71,7 @@ public class Catalogue extends BaseEntity implements Serializable {
 	@NotEmpty(message = "{error.catalogue.status.empty}")
 	@Size(max = 20, message = "{error.catalogue.status.max}")
 	@Column(name = "STATUS", length = 20)
-	private String status;
-
-	@Column(name = "ENVID", length = 10)
-	private Long environmentId;
-
-	@Column(name = "T24_APPLICATION_VERSION", length = 100)
-	private String t24applicationVersion;
+	private String status = "ACTIVE";
 
 	public Catalogue() {
 	}
@@ -147,7 +120,7 @@ public class Catalogue extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return String.format("%s(id=%d, name='%s', description=%s, status=%s)", this.getClass().getSimpleName(),
-				this.getId(), this.getCatalogueName(), this.getDescription(), this.getStatus());
+				this.getId(),  this.getDescription(), this.getStatus());
 	}
 
 	@Override
@@ -160,7 +133,7 @@ public class Catalogue extends BaseEntity implements Serializable {
 		if (o instanceof Catalogue) {
 			final Catalogue other = (Catalogue) o;
 			return Objects.equal(getId(), other.getId()) && Objects.equal(getDescription(), other.getDescription())
-					&& Objects.equal(getCatalogueName(), other.getCatalogueName())
+					
 					&& Objects.equal(getStatus(), other.getStatus());
 		}
 		return false;
@@ -168,22 +141,8 @@ public class Catalogue extends BaseEntity implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hashCode(getId(), getDescription(), getCatalogueName(), getStatus());
+		return Objects.hashCode(getId(), getDescription(),  getStatus());
 	}
 
-	/**
-	 * @return the t24applicationVersion
-	 */
-	public String getT24applicationVersion() {
-		return t24applicationVersion;
-	}
-
-	/**
-	 * @param t24applicationVersion
-	 *            the t24applicationVersion to set
-	 */
-	public void setT24applicationVersion(String t24applicationVersion) {
-		this.t24applicationVersion = t24applicationVersion;
-	}
 
 }

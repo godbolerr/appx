@@ -6,4 +6,6 @@ import com.appx.work.domain.Catalogue;
 
 public interface CatalogueRepository extends JpaRepository<Catalogue, Long> {
 	
+	Catalogue findByName(String name);
+	
 }
