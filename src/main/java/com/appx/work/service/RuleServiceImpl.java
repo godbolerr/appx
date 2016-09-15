@@ -3,7 +3,9 @@
  */
 package com.appx.work.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.jexl3.JexlBuilder;
@@ -62,6 +64,60 @@ public class RuleServiceImpl implements RuleService {
 		resultMap.put(e.toString(), obj);
 		LOGGER.debug(resultMap.toString());
 		return resultMap;
+	}
+
+	@Override
+	public List<Integer> getNumberSeries(String rule) {
+
+		List<Integer> numberList = new ArrayList<Integer>();
+		Map<String, Object> sourceData = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		// Dummy insertion for first run;
+		
+		sourceData.put("x", "1");
+		
+		LOGGER.debug("Working on Rule : " + rule);
+
+		EnhancedContext jexlContext = new EnhancedContext(funcs);
+		jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
+		JexlScript e = jexl.createScript(rule);
+		Object obj = e.execute(jexlContext);
+
+		// Get initial values from the first iteration.
+
+		Integer firstNumber = (Integer) sourceData.get("firstNumber");
+		Integer totalCount = (Integer) sourceData.get("totalCount");
+		Integer step = (Integer) sourceData.get("step");
+
+		LOGGER.debug("First Number " + firstNumber + " , Total Count " + totalCount);
+
+		if (firstNumber != null && totalCount != null) {
+			
+			sourceData.put("x", firstNumber);
+			
+			for ( int i = 1 ; i  <= totalCount ; i++ ) {
+				
+				e = jexl.createScript(rule);
+				obj = e.execute(jexlContext);
+
+//				LOGGER.debug(obj.toString());
+				
+				numberList.add((Integer)sourceData.get("x"));
+				if ( step != null ) {
+					firstNumber = firstNumber + step ;
+				} else {
+					firstNumber = firstNumber + 1 ;
+				}
+				sourceData.put("x", firstNumber);
+				
+			}
+
+			resultMap.put(e.toString(), obj);
+			LOGGER.debug(resultMap.toString());
+
+		}
+		return numberList;
 	}
 
 	private void initFuncs() {

@@ -2,8 +2,8 @@ package com.appx.work.common;
 
 public class AppConstants {
 	
-	public static final String SCHEMA_TYPE_SOURCE = "S";
-	public static final String SCHEMA_TYPE_TARGET = "T";
+	public static final String SCHEMA_TYPE_SOURCE = "s";
+	public static final String SCHEMA_TYPE_TARGET = "t";
 
 
 	
