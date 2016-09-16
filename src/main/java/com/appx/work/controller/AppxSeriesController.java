@@ -28,4 +28,5 @@ public class AppxSeriesController {
 				series.getTotal(), series.getLevel(), series.getRule());
 	}
 
+	
 }

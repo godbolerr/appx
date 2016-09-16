@@ -33,5 +33,22 @@ public interface AppxService {
 	NumberSeriesResult getSeries(NumberSeriesInput input);
 	
 	public List<Integer> generateSeries(int start,int step,int increment,int total, int level, String rule);
+	
+	// Finder methods
+	
+	List<NumberSeries> findByRule(String rule);
+	
+	List<NumberSeries> findByRuleAndLevel(String rule,int level);
+	
+	List<NumberSeries> findByStartAndStep(int start,int step);
+	
+	List<NumberSeries> findByLevel(int level);
+	
+	List<NumberSeries> findByStart(int start);
+	
+	List<NumberSeries> findByTotal(int total);
+	
+	
+	
 
 }

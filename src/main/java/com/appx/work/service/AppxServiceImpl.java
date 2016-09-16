@@ -97,8 +97,6 @@ public class AppxServiceImpl implements AppxService {
 		sourceData.put("increment", new Integer(increment));
 		sourceData.put("step", new Integer(step));
 
-		LOGGER.debug("Rule: " + rule + "[" + sourceData + "]");
-
 		Object obj = null;
 
 		EnhancedContext jexlContext = new EnhancedContext(funcs);
@@ -119,7 +117,7 @@ public class AppxServiceImpl implements AppxService {
 		}
 
 		resultMap.put(e.toString(), obj);
-		LOGGER.debug(resultMap.toString());
+		LOGGER.debug("Rule: " + rule + " [" + sourceData + "] " + resultMap.toString());
 
 		if (numberList.size() > 0) {
 			NumberSeries numSeries = new NumberSeries();
@@ -158,6 +156,38 @@ public class AppxServiceImpl implements AppxService {
 	public List<NumberSeries> getNumberSeriesList() {
 		
 		return numSeriesRepo.findAll();
+	}
+
+	@Override
+	public List<NumberSeries> findByRule(String rule) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<NumberSeries> findByRuleAndLevel(String rule, int level) {
+		return numSeriesRepo.findByRuleAndLevel(rule, level);
+	}
+
+	@Override
+	public List<NumberSeries> findByStartAndStep(int start, int step) {
+		return numSeriesRepo.findByStartAndStep(start, step);
+	}
+
+	@Override
+	public List<NumberSeries> findByLevel(int level) {
+		return numSeriesRepo.findByLevel(level);
+		
+	}
+
+	@Override
+	public List<NumberSeries> findByStart(int start) {
+		return numSeriesRepo.findByStart(start);
+	}
+
+	@Override
+	public List<NumberSeries> findByTotal(int total) {
+		return numSeriesRepo.findByTotal(total);
 	}
 
 }
