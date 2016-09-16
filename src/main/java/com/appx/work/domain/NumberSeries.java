@@ -5,36 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Objects;
-
 @Entity
-@Table(name = "APPX_CATALOGUE")
-public class Catalogue extends BaseEntity implements Serializable {
+@Table(name = "APPX_NUMSERIES")
+public class NumberSeries extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 96285180113476324L;
 
 	@Id
 	@Column(name = "id", nullable = false)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CAT_SEQUENCE")
-	@SequenceGenerator(name = "CAT_SEQUENCE", sequenceName = "CAT_SEQUENCE", initialValue = 1, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "NUM_SEQUENCE")
+	@SequenceGenerator(name = "NUM_SEQUENCE", sequenceName = "NUM_SEQUENCE", initialValue = 1, allocationSize = 1)
 	@Basic(optional = false)
 
 	private Long id;
@@ -54,99 +43,113 @@ public class Catalogue extends BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	/*
-	 * @NotNull(message = "{error.catalogue.name.null}")
-	 * 
-	 * @NotEmpty(message = "{error.catalogue.name.empty}")
+	@Size(max = 250)
+	@Column(name = "Rule", length = 250)
+	private String rule;
+
+	/**
+	 * First Number in the series
 	 */
-	@Size(max = 100, message = "{error.catalogue.name.max}")
-	@Column(name = "NAME", length = 100)
-	private String name;
+	int start;
 
-	@Size(max = 250, message = "{error.catalogue.desc.max}")
-	@Column(name = "DESCRIPTION", length = 250)
-	private String description;
+	/**
+	 * Step to be incremented with
+	 */
+	int step;
 
-	@NotNull(message = "{error.catalogue.status.null}")
-	@NotEmpty(message = "{error.catalogue.status.empty}")
-	@Size(max = 20, message = "{error.catalogue.status.max}")
-	@Column(name = "STATUS", length = 20)
-	private String status = "ACTIVE";
+	/**
+	 * How much to increment.
+	 */
+	int increment;
 
-	private String series ;
+	/**
+	 * Total number in the series.
+	 */
+	int total;
 
-	
-	
-	
-	public Catalogue() {
+	/**
+	 * Generated series
+	 */
+	String series;
+
+	/**
+	 * Difficulty
+	 */
+	int level;
+
+	/**
+	 * @return the rule
+	 */
+	public String getRule() {
+		return rule;
 	}
 
 	/**
-	 * @return the name
+	 * @param rule
+	 *            the rule to set
 	 */
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setRule(String rule) {
+		this.rule = rule;
 	}
 
 	/**
-	 * @return the description
+	 * @return the start
 	 */
-	public String getDescription() {
-		return description;
+	public int getStart() {
+		return start;
 	}
 
 	/**
-	 * @param description
-	 *            the description to set
+	 * @param start
+	 *            the start to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setStart(int start) {
+		this.start = start;
 	}
 
 	/**
-	 * @return the status
+	 * @return the step
 	 */
-	public String getStatus() {
-		return status;
+	public int getStep() {
+		return step;
 	}
 
 	/**
-	 * @param status
-	 *            the status to set
+	 * @param step
+	 *            the step to set
 	 */
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStep(int step) {
+		this.step = step;
 	}
 
-	@Override
-	public String toString() {
-		return String.format("%s(id=%d, name='%s', description=%s, status=%s)", this.getClass().getSimpleName(),
-				this.getId(),  this.getDescription(), this.getStatus());
+	/**
+	 * @return the increment
+	 */
+	public int getIncrement() {
+		return increment;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null)
-			return false;
-
-		if (o instanceof Catalogue) {
-			final Catalogue other = (Catalogue) o;
-			return Objects.equal(getId(), other.getId()) && Objects.equal(getDescription(), other.getDescription())
-					
-					&& Objects.equal(getStatus(), other.getStatus());
-		}
-		return false;
+	/**
+	 * @param increment
+	 *            the increment to set
+	 */
+	public void setIncrement(int increment) {
+		this.increment = increment;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hashCode(getId(), getDescription(),  getStatus());
+	/**
+	 * @return the totalCount
+	 */
+	public int getTotal() {
+		return total;
+	}
+
+	/**
+	 * @param totalCount
+	 *            the totalCount to set
+	 */
+	public void setTotal(int totalCount) {
+		this.total = totalCount;
 	}
 
 	/**
@@ -157,11 +160,43 @@ public class Catalogue extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param series the series to set
+	 * @param series
+	 *            the series to set
 	 */
 	public void setSeries(String series) {
 		this.series = series;
 	}
 
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
 
+	/**
+	 * @param level
+	 *            the level to set
+	 */
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	/**
+	public List<Integer> getSeriesData() {
+		
+		List<Integer> list = new ArrayList<Integer>();
+
+		if (series != null && series.contains(",")) {
+			String[] sList = series.split(",");
+			for (int i = 0; i < sList.length; i++) {
+				list.add(Integer.parseInt(sList[i]));
+			}
+		}
+
+		return list;
+
+	}
+
+**/
 }

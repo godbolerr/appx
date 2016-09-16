@@ -38,7 +38,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		this(EMPTY_MAP);
 	}
 
-	@Override
+	
 	public Charset getCharset() {
 		return Charset.defaultCharset();
 	}
@@ -84,22 +84,22 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		this.ns = namespace != null ? namespace : JexlEngine.EMPTY_NS;
 	}
 
-	@Override
+	
 	public boolean has(String name) {
 		return vars.has(name);
 	}
 
-	@Override
+	
 	public Object get(String name) {
 		return vars.get(name);
 	}
 
-	@Override
+	
 	public void set(String name, Object value) {
 		vars.set(name, value);
 	}
 
-	@Override
+	
 	public Object resolveNamespace(String name) {
 		return ns != null ? ns.resolveNamespace(name) : null;
 	}
@@ -125,7 +125,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		this.silent = s ? Boolean.TRUE : Boolean.FALSE;
 	}
 
-	@Override
+	
 	public Boolean isSilent() {
 		return this.silent;
 	}
@@ -155,7 +155,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		setStrict(se, se);
 	}
 
-	@Override
+	
 	public Boolean isStrict() {
 		if (strict == null) {
 			return null;
@@ -176,7 +176,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		this.mathStrict = s ? Boolean.TRUE : Boolean.FALSE;
 	}
 
-	@Override
+	
 	public Boolean isStrictArithmetic() {
 		if (mathStrict == null) {
 			return null;
@@ -185,7 +185,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		}
 	}
 
-	@Override
+	
 	public MathContext getArithmeticMathContext() {
 		return mathContext;
 	}
@@ -201,7 +201,7 @@ public class JexlEvalContext implements JexlContext, JexlContext.NamespaceResolv
 		mathContext = mc;
 	}
 
-	@Override
+	
 	public int getArithmeticMathScale() {
 		return mathScale;
 	}

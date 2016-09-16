@@ -13,6 +13,6 @@ public interface RuleService {
 
 	public Map<String, Object> generate(Map<String, Object> sourceData, Map<String, Object> destData, String rule);
 	
-	public List<Integer> getNumberSeries(String rule);
+	
 
 }

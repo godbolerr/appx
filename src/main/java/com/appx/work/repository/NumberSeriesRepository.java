@@ -2,10 +2,8 @@ package com.appx.work.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.appx.work.domain.Catalogue;
+import com.appx.work.domain.NumberSeries;
 
-public interface CatalogueRepository extends JpaRepository<Catalogue, Long> {
-	
-	Catalogue findByName(String name);
-	
+public interface NumberSeriesRepository extends JpaRepository<NumberSeries, Long> {
+
 }

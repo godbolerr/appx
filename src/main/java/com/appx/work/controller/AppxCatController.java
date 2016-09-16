@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appx.work.domain.Catalogue;
+import com.appx.work.domain.NumberSeries;
 import com.appx.work.service.AppxService;
 
 @RestController
@@ -24,30 +24,30 @@ public class AppxCatController {
 	static Logger logger = LoggerFactory.getLogger(AppxCatController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public Catalogue addCatalogue(@RequestBody Catalogue catalogue) {
-		return service.addCatalogue(catalogue);
+	public NumberSeries addNumberSeries(@RequestBody NumberSeries catalogue) {
+		return service.addNumberSeries(catalogue);
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH)
-	public Catalogue editCatalogue(@RequestBody Catalogue catalogue) {
+	public NumberSeries editNumberSeries(@RequestBody NumberSeries catalogue) {
 
-		return service.updateCatalogue(catalogue);
+		return service.updateNumberSeries(catalogue);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public boolean deleteCatalogue(@PathVariable("id") long id) {
-		return service.deleteCatalogue(id);
+	public boolean deleteNumberSeries(@PathVariable("id") long id) {
+		return service.deleteNumberSeries(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Catalogue getCatalogue(@PathVariable("id") long id) {
-		return service.getCatalogueById(id);
+	public NumberSeries getNumberSeries(@PathVariable("id") long id) {
+		return service.getNumberSeriesById(id);
 	}
 
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Catalogue> getCalaloguesList() {
-		return service.getCatalogues();
+	public List<NumberSeries> getCalaloguesList() {
+		return service.getNumberSeriesList();
 
 	}
 

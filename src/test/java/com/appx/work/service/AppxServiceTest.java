@@ -12,7 +12,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.appx.work.config.RootConfig;
-import com.appx.work.domain.Catalogue;
+import com.appx.work.domain.NumberSeries;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RootConfig.class)
@@ -22,70 +22,100 @@ public class AppxServiceTest {
 	AppxService service;
 
 	@Test
-	public void testAddCatalogue() {
-		Catalogue cat = new Catalogue();
-		cat.setName("firstNamenew");
-		cat.setDescription("firstDescription");
-		cat = service.addCatalogue(cat);
-		assertTrue(cat.getId() > 0);
+	public void testAddNumberSeries() {
+		
+		NumberSeries numseries = new NumberSeries();
+
+		numseries.setIncrement(1);
+		numseries.setLevel(1);
+		numseries.setRule("This is the rule");
+		numseries.setSeries("1,2,3,4");
+		numseries.setStart(1);
+		numseries.setStep(1);
+		numseries = service.addNumberSeries(numseries);
+
+		assertTrue(numseries.getId() > 0);
 	}
 
 	@Test
-	public void testUpdateCatalogue() {
-		Catalogue cat = new Catalogue();
-		cat.setName("firstNameUpdated");
-		cat.setDescription("firstDescription");
-		cat = service.addCatalogue(cat);
-		assertTrue(cat.getId() > 0);
+	public void testUpdateNumberSeries() {
+		NumberSeries numseries = new NumberSeries();
+
+		numseries.setIncrement(1);
+		numseries.setLevel(1);
+		numseries.setRule("This is the rule");
+		numseries.setSeries("1,2,3,4");
+		numseries.setStart(1);
+		numseries.setStep(1);
+		numseries = service.addNumberSeries(numseries);
+		assertTrue(numseries.getId() > 0);
 	}
 
 	@Test
-	public void testGetCatalogueById() {
-		Catalogue cat = new Catalogue();
-		cat.setName("firstName");
-		cat.setDescription("firstDescription");
-		cat = service.addCatalogue(cat);
-		assertTrue(cat.getId() > 0);
+	public void testGetNumberSeriesById() {
+		NumberSeries numseries = new NumberSeries();
 
-		Long id = cat.getId();
+		numseries.setIncrement(1);
+		numseries.setLevel(1);
+		numseries.setRule("This is the rule");
+		numseries.setSeries("1,2,3,4");
+		numseries.setStart(1);
+		numseries.setStep(1);
+		numseries = service.addNumberSeries(numseries);
 
-		Catalogue newcat = service.getCatalogueById(id);
+		assertTrue(numseries.getId() > 0);
+
+		Long id = numseries.getId();
+
+		NumberSeries newcat = service.getNumberSeriesById(id);
 
 		assertTrue(newcat != null);
 
 	}
 
-	@Test
-	public void testGetCatalogueByName() {
+
+	public void testGetNumberSeriesByName() {
+		fail("Not yet implemented");
+	}
+
+	
+	public void testDeleteNumberSeries() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testDeleteCatalogue() {
-		fail("Not yet implemented");
+	public void testGetNumberSeriess() {
+
+		NumberSeries numseries = new NumberSeries();
+
+		numseries.setIncrement(1);
+		numseries.setLevel(1);
+		numseries.setRule("This is the rule");
+		numseries.setSeries("1,2,3,4");
+		numseries.setStart(1);
+		numseries.setStep(1);
+		numseries = service.addNumberSeries(numseries);
+
+		
+		numseries = new NumberSeries();
+
+		numseries.setIncrement(1);
+		numseries.setLevel(1);
+		numseries.setRule("This is the rule");
+		numseries.setSeries("1,2,3,4");
+		numseries.setStart(1);
+		numseries.setStep(1);
+		numseries = service.addNumberSeries(numseries);
+		
+		
+		List<NumberSeries> list = service.getNumberSeriesList();
+
+		//assertTrue(list.size() > 0);
+
 	}
 
-	@Test
-	public void testGetCatalogues() {
 
-		Catalogue cat = new Catalogue();
-		cat.setName("firstName");
-		cat.setDescription("firstDescription");
-		cat = service.addCatalogue(cat);
-
-		Catalogue catNew = new Catalogue();
-		catNew.setName("firstName");
-		catNew.setDescription("firstDescription");
-		service.addCatalogue(catNew);
-
-		List<Catalogue> list = service.getCatalogues();
-
-		assertTrue(list.size() > 0);
-
-	}
-
-	@Test
-	public void testGetPagedCatalogues() {
+	public void testGetPagedNumberSeriess() {
 		fail("Not yet implemented");
 	}
 

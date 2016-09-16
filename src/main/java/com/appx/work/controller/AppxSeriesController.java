@@ -10,20 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appx.work.service.RuleService;
+import com.appx.work.domain.NumberSeries;
+import com.appx.work.service.AppxService;
 
 @RestController
 @RequestMapping(value = "/rest/appx/series")
 public class AppxSeriesController {
 
 	@Autowired
-	private RuleService service;
+	private AppxService service;
 
 	static Logger logger = LoggerFactory.getLogger(AppxSeriesController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public List<Integer> getSeries(@RequestBody String rule) {
-		return service.getNumberSeries(rule);
+	public List<Integer> getSeries(@RequestBody NumberSeries series) {
+		return service.generateSeries(series.getStart(), series.getStep(), series.getIncrement(),
+				series.getTotal(), series.getLevel(), series.getRule());
 	}
 
 }
