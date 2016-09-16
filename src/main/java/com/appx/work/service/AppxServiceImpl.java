@@ -90,6 +90,8 @@ public class AppxServiceImpl implements AppxService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		// Dummy insertion for first run;
+		
+		int start = firstNumber;
 
 		sourceData.put("x", new Integer(firstNumber));
 		sourceData.put("firstNumber", new Integer(firstNumber));
@@ -126,7 +128,7 @@ public class AppxServiceImpl implements AppxService {
 			numSeries.setLevel(level);
 			numSeries.setRule(rule);
 			numSeries.setTotal(total);
-			numSeries.setStart(firstNumber);
+			numSeries.setStart(start);
 			numSeries.setStep(step);
 			numSeries.setSeries(numberList.toString());
 
