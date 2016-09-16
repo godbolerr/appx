@@ -14,7 +14,6 @@
 	<version>1.0.0</version>
 	
 	<properties>
-		<java-version>1.8</java-version>		
 		<hikaricp-version>2.2.5</hikaricp-version>
 		<commons-lang-version>2.6</commons-lang-version>
 	</properties>

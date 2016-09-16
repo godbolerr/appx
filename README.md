@@ -24,5 +24,7 @@ Take a  starting number , get the next number in a pattern. on the identified nu
 6. 
 
 http://www.mathsisfun.com/algebra/sequences-series.html
+https://docs.oracle.com/javase/tutorial/essential/regex/index.html
+
 
  
