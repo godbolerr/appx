@@ -72,6 +72,11 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * Difficulty
 	 */
 	int level;
+	
+	/**
+	 * Increment defined for the expression
+	 */
+	int increment;
 
 	/**
 	 * @return the id
@@ -206,6 +211,20 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 */
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	/**
+	 * @return the increment
+	 */
+	public int getIncrement() {
+		return increment;
+	}
+
+	/**
+	 * @param increment the increment to set
+	 */
+	public void setIncrement(int increment) {
+		this.increment = increment;
 	}
 
 }

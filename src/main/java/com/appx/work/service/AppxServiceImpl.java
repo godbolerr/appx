@@ -90,7 +90,7 @@ public class AppxServiceImpl implements AppxService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 
 		// Dummy insertion for first run;
-		
+
 		int start = firstNumber;
 
 		sourceData.put("x", new Integer(firstNumber));
@@ -124,14 +124,14 @@ public class AppxServiceImpl implements AppxService {
 		if (numberList.size() > 0) {
 			SeriesDefinition numSeries = new SeriesDefinition();
 
-//			numSeries.setIncrement(increment);
-//			numSeries.setLevel(level);
-//			numSeries.setRule(rule);
-//			numSeries.setTotal(total);
-//			numSeries.setStart(start);
-//			numSeries.setStep(step);
-//			numSeries.setSeries(numberList.toString());
-//
+			// numSeries.setIncrement(increment);
+			// numSeries.setLevel(level);
+			// numSeries.setRule(rule);
+			// numSeries.setTotal(total);
+			// numSeries.setStart(start);
+			// numSeries.setStep(step);
+			// numSeries.setSeries(numberList.toString());
+			//
 			numSeriesRepo.save(numSeries);
 
 		}
@@ -156,7 +156,7 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public List<SeriesDefinition> getNumberSeriesList() {
-		
+
 		return numSeriesRepo.findAll();
 	}
 
@@ -179,7 +179,7 @@ public class AppxServiceImpl implements AppxService {
 	@Override
 	public List<SeriesDefinition> findByLevel(int level) {
 		return null;// return numSeriesRepo.findByLevel(level);
-		
+
 	}
 
 	@Override
@@ -190,6 +190,68 @@ public class AppxServiceImpl implements AppxService {
 	@Override
 	public List<SeriesDefinition> findByTotal(int total) {
 		return null;// return numSeriesRepo.findByTotal(total);
+	}
+
+	@Override
+	public List<String> generate(SeriesDefinition definition) {
+		
+		List<String> result = new ArrayList<String>();
+
+		String startNumbers = definition.getStartNumbers();
+
+		Map<String, Object> sourceData = new HashMap<String, Object>();
+
+		String[] numArray = null;
+
+		if (startNumbers != null && startNumbers.contains(",")) {
+
+			numArray = startNumbers.split(",");
+
+			for (int i = 0; i < numArray.length; i++) {
+
+				sourceData.clear();
+
+				for (int j = 1; j <= 7; j++) {
+					sourceData.put("x" + j, "");
+				}
+
+				sourceData.put("n", definition.getIncrement());
+
+				String rule = definition.getEncodedSeries();
+
+				String[] rArray = rule.split(",");
+
+				StringBuffer sb = new StringBuffer();
+
+				for (int j = 0; j < rArray.length; j++) {
+
+					String newRule = "x" + (j + 1) + "=" + rArray[j] + ";";
+					sb.append(newRule);
+				}
+
+				rule = sb.toString();
+				rule = rule.replaceAll("[a-z][0-9]*", "s.$0");
+				sourceData.put("x", Integer.parseInt(numArray[i]));
+				EnhancedContext jexlContext = new EnhancedContext(funcs);
+				jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
+				JexlScript e = jexl.createScript(rule);
+				e.execute(jexlContext);
+				System.out.println(sourceData);
+				
+				String series = "";
+				for (int j = 1; j <= rArray.length; j++) {
+					
+					Integer value = (Integer)sourceData.get("x"+j);
+					
+					series = series + value + " " ; 
+				}
+				result.add(series);
+				
+			}
+
+		}
+
+		return result;
 	}
 
 }

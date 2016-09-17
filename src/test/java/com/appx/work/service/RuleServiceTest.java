@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.appx.work.config.EmptyConfig;
+import com.appx.work.domain.SeriesDefinition;
 
 @ContextConfiguration(classes = { EmptyConfig.class })
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,52 +28,22 @@ public class RuleServiceTest extends Assert {
 	@Test
 	public void testNumberSeriesForSquare() {
 
-		Map<String, Object> sourceData = new HashMap<String, Object>();
-		Map<String, Object> destData = new HashMap<String, Object>();
-		destData.put("z", "");
-		String rule = new String("s.x = s.x * s.x ;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
+		SeriesDefinition def = new SeriesDefinition();
+		def.setStartNumbers("1,2,3");		
+		def.setIncrement(1);
+		def.setEncodedSeries("x, x1+1 , x2+2, x3+ 3, x4+ 4, x5+5 ");
+
+		System.out.println(appxService.generate(def));
 	}
+	
 
-	@Test
-	public void testNumberSeriesForCube() {
-		String rule = new String("s.x = s.x * s.x * s.x ;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
+	public void testReplace() {
 
+		String xstring = "x1 = x + 2";
+	
+		System.out.println(">> " + xstring.replaceAll("[a-z][0-9]*", "s.$0"));
+	
 	}
-
-	@Test
-	public void testNumberSeriesForIncrement() {
-		String rule = new String("s.x = s.x + s.increment ;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
-
-	}
-
-	@Test
-	public void testNumberSeriesForIncrementWithSquare() {
-		String rule = new String("s.x = s.x * s.x + s.increment ;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
-
-	}
-
-	@Test
-	public void testNumberSeriesForIncrementWithSquareOne() {
-		String rule = new String("s.x = s.x * s.x + s.increment ;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
-
-	}
-
-	@Test
-	public void testNumberSeriesForIncrementWithSquareMultiplication() {
-		String rule = new String("s.x = s.x * s.x + s.increment * s.increment;");
-		List<Integer> result = appxService.generateSeries(1,1,1,5,1,rule);
-		LOGGER.debug(result.toString());
-
-	}
+	
 
 }

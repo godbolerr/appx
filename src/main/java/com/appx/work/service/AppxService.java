@@ -34,6 +34,8 @@ public interface AppxService {
 	
 	public List<Integer> generateSeries(int start,int step,int increment,int total, int level, String rule);
 	
+	public List<String> generate(SeriesDefinition definition);
+	
 	// Finder methods
 	
 	List<SeriesDefinition> findByRule(String rule);
