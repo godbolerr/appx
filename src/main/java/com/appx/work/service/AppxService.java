@@ -8,25 +8,25 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.appx.work.domain.NumberSeries;
+import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.to.NumberSeriesInput;
 import com.appx.work.to.NumberSeriesResult;
 
 public interface AppxService {
 	
-	public NumberSeries addNumberSeries(NumberSeries numSeries);
+	public SeriesDefinition addNumberSeries(SeriesDefinition numSeries);
 
-	public NumberSeries updateNumberSeries(NumberSeries numSeries);
+	public SeriesDefinition updateNumberSeries(SeriesDefinition numSeries);
 
-	public NumberSeries getNumberSeriesById(Long numSeriesId);
+	public SeriesDefinition getNumberSeriesById(Long numSeriesId);
 
-	public NumberSeries getNumberSeriesByName(String numSeriesName);
+	public SeriesDefinition getNumberSeriesByName(String numSeriesName);
 
 	public boolean deleteNumberSeries(Long numSeriesId);
 
-	public List<NumberSeries> getNumberSeriesList();
+	public List<SeriesDefinition> getNumberSeriesList();
 
-	Page<NumberSeries> getPagedNumberSeriess(Pageable pageable);
+	Page<SeriesDefinition> getPagedNumberSeriess(Pageable pageable);
 
 	// Calculate number series based on the script provided.
 
@@ -36,17 +36,17 @@ public interface AppxService {
 	
 	// Finder methods
 	
-	List<NumberSeries> findByRule(String rule);
+	List<SeriesDefinition> findByRule(String rule);
 	
-	List<NumberSeries> findByRuleAndLevel(String rule,int level);
+	List<SeriesDefinition> findByRuleAndLevel(String rule,int level);
 	
-	List<NumberSeries> findByStartAndStep(int start,int step);
+	List<SeriesDefinition> findByStartAndStep(int start,int step);
 	
-	List<NumberSeries> findByLevel(int level);
+	List<SeriesDefinition> findByLevel(int level);
 	
-	List<NumberSeries> findByStart(int start);
+	List<SeriesDefinition> findByStart(int start);
 	
-	List<NumberSeries> findByTotal(int total);
+	List<SeriesDefinition> findByTotal(int total);
 	
 	
 	

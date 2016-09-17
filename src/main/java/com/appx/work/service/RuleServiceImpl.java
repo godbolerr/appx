@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.common.AppConstants;
-import com.appx.work.domain.NumberSeries;
+import com.appx.work.domain.SeriesDefinition;
 
 /**
  * @author 115750

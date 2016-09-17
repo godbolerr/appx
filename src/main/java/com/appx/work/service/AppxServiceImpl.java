@@ -19,8 +19,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.common.AppConstants;
-import com.appx.work.domain.NumberSeries;
-import com.appx.work.repository.NumberSeriesRepository;
+import com.appx.work.domain.SeriesDefinition;
+import com.appx.work.repository.SeriesDefinitionRepository;
 import com.appx.work.to.NumberSeriesInput;
 import com.appx.work.to.NumberSeriesResult;
 
@@ -38,7 +38,7 @@ public class AppxServiceImpl implements AppxService {
 	JexlEngine jexl = new JexlBuilder().cache(512).strict(true).silent(false).create();
 
 	@Autowired
-	private NumberSeriesRepository numSeriesRepo;
+	private SeriesDefinitionRepository numSeriesRepo;
 
 	/**
 	 * 
@@ -47,33 +47,33 @@ public class AppxServiceImpl implements AppxService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public NumberSeries addNumberSeries(NumberSeries numSeries) {
+	public SeriesDefinition addNumberSeries(SeriesDefinition numSeries) {
 		return numSeriesRepo.save(numSeries);
 	}
 
-	public NumberSeries updateNumberSeries(NumberSeries numSeries) {
+	public SeriesDefinition updateNumberSeries(SeriesDefinition numSeries) {
 		return numSeriesRepo.save(numSeries);
 	}
 
-	public NumberSeries getNumberSeriesById(Long numSeriesId) {
+	public SeriesDefinition getNumberSeriesById(Long numSeriesId) {
 		return numSeriesRepo.findOne(numSeriesId);
 	}
 
-	public NumberSeries getNumberSeriesByName(String numSeriesName) {
+	public SeriesDefinition getNumberSeriesByName(String numSeriesName) {
 		return null;// numSeriesRepo.findByName(numSeriesName);
 	}
 
 	public boolean deleteNumberSeries(Long numSeriesId) {
-		NumberSeries cat = numSeriesRepo.getOne(numSeriesId);
+		SeriesDefinition cat = numSeriesRepo.getOne(numSeriesId);
 		numSeriesRepo.delete(cat);
 		return true;
 	}
 
-	public List<NumberSeries> getNumberSeriess() {
+	public List<SeriesDefinition> getNumberSeriess() {
 		return numSeriesRepo.findAll();
 	}
 
-	public Page<NumberSeries> getPagedNumberSeriess(Pageable pageable) {
+	public Page<SeriesDefinition> getPagedNumberSeriess(Pageable pageable) {
 		return numSeriesRepo.findAll(pageable);
 	}
 
@@ -122,16 +122,16 @@ public class AppxServiceImpl implements AppxService {
 		LOGGER.debug("Rule: " + rule + " [" + sourceData + "] " + resultMap.toString());
 
 		if (numberList.size() > 0) {
-			NumberSeries numSeries = new NumberSeries();
+			SeriesDefinition numSeries = new SeriesDefinition();
 
-			numSeries.setIncrement(increment);
-			numSeries.setLevel(level);
-			numSeries.setRule(rule);
-			numSeries.setTotal(total);
-			numSeries.setStart(start);
-			numSeries.setStep(step);
-			numSeries.setSeries(numberList.toString());
-
+//			numSeries.setIncrement(increment);
+//			numSeries.setLevel(level);
+//			numSeries.setRule(rule);
+//			numSeries.setTotal(total);
+//			numSeries.setStart(start);
+//			numSeries.setStep(step);
+//			numSeries.setSeries(numberList.toString());
+//
 			numSeriesRepo.save(numSeries);
 
 		}
@@ -155,41 +155,41 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public List<NumberSeries> getNumberSeriesList() {
+	public List<SeriesDefinition> getNumberSeriesList() {
 		
 		return numSeriesRepo.findAll();
 	}
 
 	@Override
-	public List<NumberSeries> findByRule(String rule) {
+	public List<SeriesDefinition> findByRule(String rule) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<NumberSeries> findByRuleAndLevel(String rule, int level) {
-		return numSeriesRepo.findByRuleAndLevel(rule, level);
+	public List<SeriesDefinition> findByRuleAndLevel(String rule, int level) {
+		return null;// return numSeriesRepo.findByRuleAndLevel(rule, level);
 	}
 
 	@Override
-	public List<NumberSeries> findByStartAndStep(int start, int step) {
-		return numSeriesRepo.findByStartAndStep(start, step);
+	public List<SeriesDefinition> findByStartAndStep(int start, int step) {
+		return null;// return numSeriesRepo.findByStartAndStep(start, step);
 	}
 
 	@Override
-	public List<NumberSeries> findByLevel(int level) {
-		return numSeriesRepo.findByLevel(level);
+	public List<SeriesDefinition> findByLevel(int level) {
+		return null;// return numSeriesRepo.findByLevel(level);
 		
 	}
 
 	@Override
-	public List<NumberSeries> findByStart(int start) {
-		return numSeriesRepo.findByStart(start);
+	public List<SeriesDefinition> findByStart(int start) {
+		return null;// return numSeriesRepo.findByStart(start);
 	}
 
 	@Override
-	public List<NumberSeries> findByTotal(int total) {
-		return numSeriesRepo.findByTotal(total);
+	public List<SeriesDefinition> findByTotal(int total) {
+		return null;// return numSeriesRepo.findByTotal(total);
 	}
 
 }

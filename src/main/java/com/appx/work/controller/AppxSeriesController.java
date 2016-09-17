@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appx.work.domain.NumberSeries;
+import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.service.AppxService;
 
 @RestController
@@ -23,9 +23,8 @@ public class AppxSeriesController {
 	static Logger logger = LoggerFactory.getLogger(AppxSeriesController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public List<Integer> getSeries(@RequestBody NumberSeries series) {
-		return service.generateSeries(series.getStart(), series.getStep(), series.getIncrement(),
-				series.getTotal(), series.getLevel(), series.getRule());
+	public List<Integer> getSeries(@RequestBody SeriesDefinition series) {
+		return null;
 	}
 
 	

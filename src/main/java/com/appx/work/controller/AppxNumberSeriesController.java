@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.appx.work.domain.NumberSeries;
+import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.service.AppxService;
 
 @RestController
@@ -24,12 +24,12 @@ public class AppxNumberSeriesController {
 	static Logger logger = LoggerFactory.getLogger(AppxNumberSeriesController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public NumberSeries addNumberSeries(@RequestBody NumberSeries catalogue) {
+	public SeriesDefinition addNumberSeries(@RequestBody SeriesDefinition catalogue) {
 		return service.addNumberSeries(catalogue);
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH)
-	public NumberSeries editNumberSeries(@RequestBody NumberSeries catalogue) {
+	public SeriesDefinition editNumberSeries(@RequestBody SeriesDefinition catalogue) {
 
 		return service.updateNumberSeries(catalogue);
 	}
@@ -40,43 +40,43 @@ public class AppxNumberSeriesController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public NumberSeries getNumberSeries(@PathVariable("id") long id) {
+	public SeriesDefinition getNumberSeries(@PathVariable("id") long id) {
 		return service.getNumberSeriesById(id);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public List<NumberSeries> getNumberSeriesList() {
+	public List<SeriesDefinition> getNumberSeriesList() {
 		return service.getNumberSeriesList();
 
 	}
 
 	@RequestMapping(value = "rule", method = RequestMethod.POST)
-	List<NumberSeries> findByRule(@RequestBody String rule) {
+	List<SeriesDefinition> findByRule(@RequestBody String rule) {
 		return service.findByRule(rule);
 	}
 
 	@RequestMapping(value = "rule/{level}", method = RequestMethod.POST)
-	List<NumberSeries> findByRuleAndLevel(@RequestBody String rule, @PathVariable("level") int level) {
+	List<SeriesDefinition> findByRuleAndLevel(@RequestBody String rule, @PathVariable("level") int level) {
 		return service.findByRuleAndLevel(rule, level);
 	}
 
 	@RequestMapping(value = "rule/{start}/{step}", method = RequestMethod.GET)
-	List<NumberSeries> findByStartAndStep(@PathVariable("start") int start, @PathVariable("step") int step) {
+	List<SeriesDefinition> findByStartAndStep(@PathVariable("start") int start, @PathVariable("step") int step) {
 		return service.findByStartAndStep(start, step);
 	}
 
 	@RequestMapping(value = "ruleByLevel/{level}", method = RequestMethod.GET)
-	List<NumberSeries> findByLevel(@PathVariable("level") int level) {
+	List<SeriesDefinition> findByLevel(@PathVariable("level") int level) {
 		return service.findByLevel(level);
 	}
 
 	@RequestMapping(value = "ruleByStart/{start}", method = RequestMethod.GET)
-	List<NumberSeries> findByStart(@PathVariable("start") int start) {
+	List<SeriesDefinition> findByStart(@PathVariable("start") int start) {
 		return service.findByStart(start);
 	}
 
 	@RequestMapping(value = "ruleByTotal/{total}", method = RequestMethod.GET)
-	List<NumberSeries> findByTotal(@PathVariable("total") int total) {
+	List<SeriesDefinition> findByTotal(@PathVariable("total") int total) {
 		return service.findByTotal(total);
 	}
 
