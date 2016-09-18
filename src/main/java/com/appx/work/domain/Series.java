@@ -31,9 +31,17 @@ public class Series extends BaseEntity {
 	public Series() {
 
 	}
-	
+
 	@Size(max = 255)
 	private String series;
+
+	private String answer;
+
+	private String start;
+
+	private String increment;
+
+	private String options;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "defn_id")
@@ -78,16 +86,76 @@ public class Series extends BaseEntity {
 	}
 
 	/**
-	 * @param series the series to set
+	 * @param series
+	 *            the series to set
 	 */
 	public void setSeries(String series) {
 		this.series = series;
 	}
-	
+
+	/**
+	 * @return the answer
+	 */
+	public String getAnswer() {
+		return answer;
+	}
+
+	/**
+	 * @param answer
+	 *            the answer to set
+	 */
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	/**
+	 * @return the start
+	 */
+	public String getStart() {
+		return start;
+	}
+
+	/**
+	 * @param start
+	 *            the start to set
+	 */
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	/**
+	 * @return the increment
+	 */
+	public String getIncrement() {
+		return increment;
+	}
+
+	/**
+	 * @param increment
+	 *            the increment to set
+	 */
+	public void setIncrement(String increment) {
+		this.increment = increment;
+	}
+
+	/**
+	 * @return the options
+	 */
+	public String getOptions() {
+		return options;
+	}
+
+	/**
+	 * @param options
+	 *            the options to set
+	 */
+	public void setOptions(String options) {
+		this.options = options;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
-
 
 }

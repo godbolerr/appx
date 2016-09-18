@@ -67,7 +67,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * 
 	 */
 	@Size(max = 255)
-	String startNumbers;
+	String startNumber;
 
 	/**
 	 * Comma separated list of variable values applicable.
@@ -181,19 +181,20 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 		this.encodedSeries = encodedSeries;
 	}
 
+	
+
 	/**
-	 * @return the startNumbers
+	 * @return the startNumber
 	 */
-	public String getStartNumbers() {
-		return startNumbers;
+	public String getStartNumber() {
+		return startNumber;
 	}
 
 	/**
-	 * @param startNumbers
-	 *            the startNumbers to set
+	 * @param startNumber the startNumber to set
 	 */
-	public void setStartNumbers(String startNumbers) {
-		this.startNumbers = startNumbers;
+	public void setStartNumber(String startNumber) {
+		this.startNumber = startNumber;
 	}
 
 	/**

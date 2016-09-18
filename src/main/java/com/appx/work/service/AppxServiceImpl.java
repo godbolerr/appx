@@ -6,6 +6,7 @@ package com.appx.work.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -198,70 +199,58 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public List<String> generate(SeriesDefinition definition) {
+	public String generate(SeriesDefinition definition) {
 
-		List<String> result = new ArrayList<String>();
+		String result = new String();
 
-		String startNumbers = definition.getStartNumbers();
+		String startNumber = definition.getStartNumber();
 
 		Map<String, Object> sourceData = new HashMap<String, Object>();
 
-		String[] numArray = null;
+		if (startNumber != null) {
 
-		if (startNumbers != null) {
-
-			numArray = startNumbers.split(",");
-
-			for (int i = 0; i < numArray.length; i++) {
-
-				sourceData.clear();
-
-				for (int j = 1; j <= 9; j++) {
-					sourceData.put("x" + j, "");
-				}
-
-				sourceData.put("n", definition.getIncrement());
-
-				String rule = definition.getEncodedSeries();
-
-				String[] rArray = rule.split(",");
-
-				StringBuffer sb = new StringBuffer();
-
-				for (int j = 0; j < rArray.length; j++) {
-
-					String newRule = "x" + (j + 1) + "=" + rArray[j] + ";";
-					sb.append(newRule);
-				}
-
-				rule = sb.toString();
-				rule = rule.replaceAll("[a-z][0-9]*", "s.$0");
-				sourceData.put("x", Integer.parseInt(numArray[i]));
-				EnhancedContext jexlContext = new EnhancedContext(funcs);
-				jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
-				JexlScript e = jexl.createScript(rule);
-				e.execute(jexlContext);
-				LOGGER.debug(sourceData.toString());
-
-				String series = "";
-				for (int j = 1; j <= rArray.length; j++) {
-
-					Integer value = (Integer) sourceData.get("x" + j);
-
-					series = series + value + ",";
-				}
-				series = series + "?";
-				result.add(series);
-
+			for (int j = 1; j <= 9; j++) {
+				sourceData.put("x" + j, "");
 			}
 
+			sourceData.put("n", definition.getIncrement());
+
+			String rule = definition.getEncodedSeries();
+
+			String[] rArray = rule.split(",");
+
+			StringBuffer sb = new StringBuffer();
+
+			for (int j = 0; j < rArray.length; j++) {
+
+				String newRule = "x" + (j + 1) + "=" + rArray[j] + ";";
+				sb.append(newRule);
+			}
+
+			rule = sb.toString();
+			rule = rule.replaceAll("[a-z][0-9]*", "s.$0");
+			sourceData.put("x", Integer.parseInt(startNumber));
+			EnhancedContext jexlContext = new EnhancedContext(funcs);
+			jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
+			JexlScript e = jexl.createScript(rule);
+			e.execute(jexlContext);
+			LOGGER.debug(sourceData.toString());
+
+			String series = "";
+			for (int j = 1; j <= rArray.length; j++) {
+
+				Integer value = (Integer) sourceData.get("x" + j);
+
+				series = series + value + ",";
+			}
+			result = series.substring(0, series.lastIndexOf(","));
 		}
 
 		return result;
 	}
 
 	@Override
-	public SeriesDefinition saveRule(SeriesDefinition defn) {
+	public SeriesDefinition saveDefinition(SeriesDefinition defn) {
 		return defnRepo.save(defn);
 	}
 
@@ -269,23 +258,52 @@ public class AppxServiceImpl implements AppxService {
 	public Series saveSeries(SeriesDefinition defn, Series series) {
 
 		series.setDefintion(defn);
-		
+
 		seriesRepo.save(series);
-		
+
 		Set<Series> sset = defn.getSeries();
-		
-		if ( sset != null ) {
+
+		if (sset != null) {
 			sset.add(series);
 		} else {
 			sset = new HashSet<Series>();
 			sset.add(series);
 			defn.setSeries(sset);
 		}
-		
+
 		defnRepo.save(defn);
 
 		return series;
 
+	}
+
+	@Override
+	public List<String> generate(SeriesDefinition definition, List<String> startNos) {
+
+		List<String> generatedSeries = new ArrayList<String>();
+
+		for (Iterator<String> iterator = startNos.iterator(); iterator.hasNext();) {
+			String startNumber = (String) iterator.next();
+			definition.setStartNumber(startNumber);
+			generatedSeries.add(generate(definition));
+		}
+
+		return generatedSeries;
+	}
+
+	@Override
+	public List<String> generate(SeriesDefinition definition, List<String> startNos, int increment) {
+
+		List<String> generatedSeries = new ArrayList<String>();
+
+		for (Iterator<String> iterator = startNos.iterator(); iterator.hasNext();) {
+			String startNumber = (String) iterator.next();
+			definition.setStartNumber(startNumber);
+			definition.setIncrement(increment);
+			generatedSeries.add(generate(definition));
+		}
+
+		return generatedSeries;
 	}
 
 }
