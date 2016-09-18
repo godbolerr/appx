@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -31,6 +32,9 @@ public abstract class BaseEntity implements Serializable {
 	public Date getCreatedAt() {
 		return createdAt;
 	}
+	
+	@Version
+	int version;
 
 	/**
 	 * @param createdAt
@@ -44,5 +48,21 @@ public abstract class BaseEntity implements Serializable {
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
+
+	/**
+	 * @return the version
+	 */
+	public int getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
+	
 
 }

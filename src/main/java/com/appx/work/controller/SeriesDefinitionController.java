@@ -50,34 +50,4 @@ public class SeriesDefinitionController {
 
 	}
 
-	@RequestMapping(value = "rule", method = RequestMethod.POST)
-	List<SeriesDefinition> findByRule(@RequestBody String rule) {
-		return service.findByRule(rule);
-	}
-
-	@RequestMapping(value = "rule/{level}", method = RequestMethod.POST)
-	List<SeriesDefinition> findByRuleAndLevel(@RequestBody String rule, @PathVariable("level") int level) {
-		return service.findByRuleAndLevel(rule, level);
-	}
-
-	@RequestMapping(value = "rule/{start}/{step}", method = RequestMethod.GET)
-	List<SeriesDefinition> findByStartAndStep(@PathVariable("start") int start, @PathVariable("step") int step) {
-		return service.findByStartAndStep(start, step);
-	}
-
-	@RequestMapping(value = "ruleByLevel/{level}", method = RequestMethod.GET)
-	List<SeriesDefinition> findByLevel(@PathVariable("level") int level) {
-		return service.findByLevel(level);
-	}
-
-	@RequestMapping(value = "ruleByStart/{start}", method = RequestMethod.GET)
-	List<SeriesDefinition> findByStart(@PathVariable("start") int start) {
-		return service.findByStart(start);
-	}
-
-	@RequestMapping(value = "ruleByTotal/{total}", method = RequestMethod.GET)
-	List<SeriesDefinition> findByTotal(@PathVariable("total") int total) {
-		return service.findByTotal(total);
-	}
-
 }
