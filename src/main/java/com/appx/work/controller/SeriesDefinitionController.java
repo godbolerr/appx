@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.service.AppxService;
+import com.appx.work.to.SeriesDefinitionTO;
 
 @RestController
 @RequestMapping(value = "/rest/appx/seriesdefn")
@@ -40,7 +41,7 @@ public class SeriesDefinitionController {
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public SeriesDefinition getNumberSeries(@PathVariable("id") long id) {
+	public SeriesDefinitionTO getNumberSeries(@PathVariable("id") long id) {
 		return service.getSeriesDefinition(id);
 	}
 

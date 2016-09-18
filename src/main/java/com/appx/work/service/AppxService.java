@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
+import com.appx.work.to.SeriesDefinitionTO;
+import com.appx.work.to.SeriesTO;
 
 public interface AppxService {
 	
@@ -22,17 +24,17 @@ public interface AppxService {
 	
 	Series deleteSeries(Long id);
 
-	Series getSeries(Long id);
+	SeriesTO getSeries(Long id);
 	
-	 List<Series> getAllSeries();
+	 List<SeriesTO> getAllSeries();
 	 
 	 public SeriesDefinition createSeriesDefinition(SeriesDefinition defn);
 
 	public SeriesDefinition updateSeriesDefinition(SeriesDefinition defn);
 
-	public SeriesDefinition getSeriesDefinition(Long id);
+	public SeriesDefinitionTO getSeriesDefinition(Long id);
 
-	public SeriesDefinition getSeriesDefinitionByName(String name);
+	public SeriesDefinitionTO getSeriesDefinitionByName(String name);
 
 	public boolean deleteSeriesDefinition(Long id);
 

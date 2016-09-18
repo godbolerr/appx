@@ -5,10 +5,12 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.service.AppxService;
+import com.appx.work.to.SeriesDefinitionTO;
 
 public class AppxUtil {
 
@@ -231,30 +233,43 @@ public class AppxUtil {
 
 		List<Long> result = new ArrayList<Long>();
 
-		multipleLoads( service.getSeriesDefinitionByName("IncrementWithOne") , new String[] {"3", "7", "9", "21", "27", "91", "101", "103"} , new Integer[] { 1 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("SquareSeries") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("CubeSeries") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("SquareSeriesPlusN") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 ,3 , 5 , 7 , 9 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("SquareSeriesMinusN") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 ,3 , 5 , 7 , 9 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("SeriesMultiplyN") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 ,3 , 5 , 7 , 9 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("AlternateIncrease") , new String[] {"2", "3", "4", "5", "6", "7", "8", "9"} , new Integer[] { 1 ,3 , 5 , 7 , 9 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("AlternateDecreasing") , new String[] {"100","90","80","70","60"} , new Integer[] { 1 ,3 , 5 , 7 , 9 } , result);		
-		multipleLoads( service.getSeriesDefinitionByName("AlternateIncrease") , new String[] {"12", "32", "24", "45", "56", "37", "18", "92"} , new Integer[] { 1,4,6,7 } , result);
-		multipleLoads( service.getSeriesDefinitionByName("DecreasingNumbers") , new String[] {"100","90","80","70","60"} , new Integer[] { 1 } , result);
-		
+		multipleLoads(service.getSeriesDefinitionByName("IncrementWithOne"),
+				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, new Integer[] { 1 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("SquareSeries"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("CubeSeries"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("SquareSeriesPlusN"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("SquareSeriesMinusN"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("SeriesMultiplyN"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("AlternateIncrease"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("AlternateDecreasing"),
+				new String[] { "100", "90", "80", "70", "60" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("AlternateIncrease"),
+				new String[] { "12", "32", "24", "45", "56", "37", "18", "92" }, new Integer[] { 1, 4, 6, 7 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("DecreasingNumbers"),
+				new String[] { "100", "90", "80", "70", "60" }, new Integer[] { 1 }, result);
+
 		return result;
 	}
 
-	
-	private static void multipleLoads(SeriesDefinition definition, String[] startNumbers,Integer[] increments,List<Long> result ) {
-		
+	private static void multipleLoads(SeriesDefinitionTO definition, String[] startNumbers, Integer[] increments,
+			List<Long> result) {
+
 		for (int i = 0; i < startNumbers.length; i++) {
 
 			String startNo = startNumbers[i];
 
 			for (int j = 0; j < increments.length; j++) {
 				int increment = increments[j];
-				Series series = service.saveSeries(definition, startNo, increment);
+
+				SeriesDefinition defn = new SeriesDefinition();
+				BeanUtils.copyProperties(definition, defn);
+				Series series = service.saveSeries(defn, startNo, increment);
 				result.add(series.getId());
 			}
 

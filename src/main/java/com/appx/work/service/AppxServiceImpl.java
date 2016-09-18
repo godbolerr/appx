@@ -16,6 +16,7 @@ import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlScript;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,8 @@ import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.repository.SeriesDefinitionRepository;
 import com.appx.work.repository.SeriesRepository;
-import com.appx.work.to.NumberSeriesInput;
-import com.appx.work.to.NumberSeriesResult;
+import com.appx.work.to.SeriesDefinitionTO;
+import com.appx.work.to.SeriesTO;
 
 /**
  * @author 115750
@@ -74,13 +75,20 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public Series getSeries(Long id) {
-		return seriesRepo.findOne(id);
+	public SeriesTO getSeries(Long id) {
+		SeriesTO sto = new SeriesTO();
+		Series series = seriesRepo.findOne(id);
+		sto.setDefintion(new SeriesDefinitionTO());
+		BeanUtils.copyProperties(series,sto);
+		//BeanUtils.copyProperties(series.getDefintion().getId(),sto.getDefintion().getId());
+		return sto;
 	}
 
 	@Override
-	public List<Series> getAllSeries() {
-		return seriesRepo.findAll();
+	public List<SeriesTO> getAllSeries() {
+		List<SeriesTO> stoList = new ArrayList<SeriesTO>();
+		BeanUtils.copyProperties(seriesRepo.findAll(),stoList);
+		return stoList;
 	}
 
 	@Override
@@ -94,13 +102,17 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public SeriesDefinition getSeriesDefinition(Long id) {
-		return definitionRepo.findOne(id);
+	public SeriesDefinitionTO getSeriesDefinition(Long id) {
+		SeriesDefinitionTO sto = new SeriesDefinitionTO();
+		BeanUtils.copyProperties(definitionRepo.findOne(id),sto);
+		return sto;
 	}
 
 	@Override
-	public SeriesDefinition getSeriesDefinitionByName(String name) {
-		return definitionRepo.findByName(name);
+	public SeriesDefinitionTO getSeriesDefinitionByName(String name) {
+		SeriesDefinitionTO sto = new SeriesDefinitionTO();
+		BeanUtils.copyProperties(definitionRepo.findByName(name),sto);
+		return sto;
 	}
 
 	@Override

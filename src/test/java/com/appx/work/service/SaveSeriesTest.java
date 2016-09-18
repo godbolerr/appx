@@ -16,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.appx.work.config.EmptyConfig;
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
+import com.appx.work.to.SeriesDefinitionTO;
 
 // 
 @ContextConfiguration(classes = { EmptyConfig.class })
@@ -51,7 +52,7 @@ public class SaveSeriesTest extends Assert {
 
 		LOGGER.debug(ser.toString());
 
-		SeriesDefinition sdef = appxService.getSeriesDefinition(def.getId());
+		SeriesDefinitionTO sdef = appxService.getSeriesDefinition(def.getId());
 
 		LOGGER.debug(sdef.toString());
 
@@ -83,9 +84,9 @@ public class SaveSeriesTest extends Assert {
 			assertTrue(series.getId() > 0);
 		}
 
-		def = appxService.getSeriesDefinition(def.getId());
+		SeriesDefinitionTO stoDef = appxService.getSeriesDefinition(def.getId());
 
-		int totalSeries = def.getSeries().size();
+		int totalSeries = stoDef.getSeries().size();
 
 		assertTrue(totalSeries == 3);
 
