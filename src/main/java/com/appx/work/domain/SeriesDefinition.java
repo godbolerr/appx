@@ -76,7 +76,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	/**
 	 * Increment defined for the expression
 	 */
-	int increment;
+	int increment = 1;
 
 	/**
 	 * @return the id

@@ -203,7 +203,7 @@ public class AppxServiceImpl implements AppxService {
 
 		String[] numArray = null;
 
-		if (startNumbers != null && startNumbers.contains(",")) {
+		if (startNumbers != null ) {
 
 			numArray = startNumbers.split(",");
 
@@ -211,10 +211,11 @@ public class AppxServiceImpl implements AppxService {
 
 				sourceData.clear();
 
-				for (int j = 1; j <= 7; j++) {
+				for (int j = 1; j <= 9; j++) {
 					sourceData.put("x" + j, "");
 				}
 
+				
 				sourceData.put("n", definition.getIncrement());
 
 				String rule = definition.getEncodedSeries();
@@ -236,15 +237,16 @@ public class AppxServiceImpl implements AppxService {
 				jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
 				JexlScript e = jexl.createScript(rule);
 				e.execute(jexlContext);
-				System.out.println(sourceData);
+				LOGGER.debug(sourceData.toString());
 				
 				String series = "";
 				for (int j = 1; j <= rArray.length; j++) {
 					
 					Integer value = (Integer)sourceData.get("x"+j);
 					
-					series = series + value + " " ; 
+					series = series + value + "," ; 
 				}
+				series = series + "?";
 				result.add(series);
 				
 			}
