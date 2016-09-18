@@ -5,8 +5,10 @@ package com.appx.work.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
@@ -19,8 +21,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.common.AppConstants;
+import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.repository.SeriesDefinitionRepository;
+import com.appx.work.repository.SeriesRepository;
 import com.appx.work.to.NumberSeriesInput;
 import com.appx.work.to.NumberSeriesResult;
 
@@ -39,6 +43,8 @@ public class AppxServiceImpl implements AppxService {
 
 	@Autowired
 	private SeriesDefinitionRepository numSeriesRepo;
+	@Autowired
+	private SeriesRepository seriesRepo;
 
 	/**
 	 * 
@@ -194,7 +200,7 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public List<String> generate(SeriesDefinition definition) {
-		
+
 		List<String> result = new ArrayList<String>();
 
 		String startNumbers = definition.getStartNumbers();
@@ -203,7 +209,7 @@ public class AppxServiceImpl implements AppxService {
 
 		String[] numArray = null;
 
-		if (startNumbers != null ) {
+		if (startNumbers != null) {
 
 			numArray = startNumbers.split(",");
 
@@ -215,7 +221,6 @@ public class AppxServiceImpl implements AppxService {
 					sourceData.put("x" + j, "");
 				}
 
-				
 				sourceData.put("n", definition.getIncrement());
 
 				String rule = definition.getEncodedSeries();
@@ -238,22 +243,50 @@ public class AppxServiceImpl implements AppxService {
 				JexlScript e = jexl.createScript(rule);
 				e.execute(jexlContext);
 				LOGGER.debug(sourceData.toString());
-				
+
 				String series = "";
 				for (int j = 1; j <= rArray.length; j++) {
-					
-					Integer value = (Integer)sourceData.get("x"+j);
-					
-					series = series + value + "," ; 
+
+					Integer value = (Integer) sourceData.get("x" + j);
+
+					series = series + value + ",";
 				}
 				series = series + "?";
 				result.add(series);
-				
+
 			}
 
 		}
 
 		return result;
+	}
+
+	@Override
+	public SeriesDefinition saveRule(SeriesDefinition defn) {
+		return numSeriesRepo.save(defn);
+	}
+
+	@Override
+	public Series saveSeries(SeriesDefinition defn, Series series) {
+
+		series.setDefintion(defn);
+		
+		seriesRepo.save(series);
+		
+		Set<Series> sset = defn.getSeries();
+		
+		if ( sset != null ) {
+			sset.add(series);
+		} else {
+			sset = new HashSet<Series>();
+			sset.add(series);
+			defn.setSeries(sset);
+		}
+		
+		numSeriesRepo.save(defn);
+
+		return series;
+
 	}
 
 }

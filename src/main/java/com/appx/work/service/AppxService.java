@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.to.NumberSeriesInput;
 import com.appx.work.to.NumberSeriesResult;
@@ -49,6 +50,10 @@ public interface AppxService {
 	List<SeriesDefinition> findByStart(int start);
 	
 	List<SeriesDefinition> findByTotal(int total);
+	
+	SeriesDefinition saveRule(SeriesDefinition defn);
+	
+	Series saveSeries(SeriesDefinition defn,Series series);
 	
 	
 	

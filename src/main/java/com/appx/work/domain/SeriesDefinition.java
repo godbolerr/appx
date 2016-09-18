@@ -1,16 +1,23 @@
 package com.appx.work.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Entity
 @Table(name = "APPX_SERDEFN")
@@ -72,11 +79,17 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * Difficulty
 	 */
 	int level;
-	
+
 	/**
 	 * Increment defined for the expression
 	 */
 	int increment = 1;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "APPX_DEFN_SERIES", joinColumns = {
+			@JoinColumn(name = "defn_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "ser_id", referencedColumnName = "id") })
+	private Set<Series> series;
 
 	/**
 	 * @return the id
@@ -221,10 +234,32 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param increment the increment to set
+	 * @param increment
+	 *            the increment to set
 	 */
 	public void setIncrement(int increment) {
 		this.increment = increment;
 	}
 
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
+
+	/**
+	 * @return the series
+	 */
+	public Set<Series> getSeries() {
+		return series;
+	}
+
+	/**
+	 * @param series the series to set
+	 */
+	public void setSeries(Set<Series> series) {
+		this.series = series;
+	}
+
+	
+	
 }
