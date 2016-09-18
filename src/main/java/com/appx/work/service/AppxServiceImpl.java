@@ -43,7 +43,7 @@ public class AppxServiceImpl implements AppxService {
 	JexlEngine jexl = new JexlBuilder().cache(512).strict(true).silent(false).create();
 
 	@Autowired
-	private SeriesDefinitionRepository defnRepo;
+	private SeriesDefinitionRepository definitionRepo;
 	@Autowired
 	private SeriesRepository seriesRepo;
 
@@ -53,42 +53,76 @@ public class AppxServiceImpl implements AppxService {
 	public AppxServiceImpl() {
 	}
 
-	public SeriesDefinition addNumberSeries(SeriesDefinition numSeries) {
-		return defnRepo.save(numSeries);
+	@Override
+	public Series createSeries(Series series) {
+
+		return seriesRepo.save(series);
 	}
 
-	public SeriesDefinition updateNumberSeries(SeriesDefinition numSeries) {
-		return defnRepo.save(numSeries);
+	@Override
+	public Series udpateSeries(Series series) {
+		return seriesRepo.save(series);
 	}
 
-	public SeriesDefinition getNumberSeriesById(Long numSeriesId) {
-		return defnRepo.findOne(numSeriesId);
+	@Override
+	public Series deleteSeries(Long id) {
+		Series series = seriesRepo.findOne(id);
+		if (series != null) {
+			seriesRepo.delete(series);
+		}
+		return series;
 	}
 
-	public SeriesDefinition getNumberSeriesByName(String numSeriesName) {
-		return null;// defnRepo.findByName(numSeriesName);
+	@Override
+	public Series getSeries(Long id) {
+		return seriesRepo.findOne(id);
 	}
 
-	public boolean deleteNumberSeries(Long numSeriesId) {
-		SeriesDefinition cat = defnRepo.getOne(numSeriesId);
-		defnRepo.delete(cat);
-		return true;
+	@Override
+	public List<Series> getAllSeries() {
+		return seriesRepo.findAll();
 	}
 
-	public List<SeriesDefinition> getNumberSeriess() {
-		return defnRepo.findAll();
+	@Override
+	public SeriesDefinition createSeriesDefinition(SeriesDefinition defn) {
+		return definitionRepo.save(defn);
 	}
 
-	public Page<SeriesDefinition> getPagedNumberSeriess(Pageable pageable) {
-		return defnRepo.findAll(pageable);
+	@Override
+	public SeriesDefinition updateSeriesDefinition(SeriesDefinition defn) {
+		return definitionRepo.save(defn);
 	}
 
-	public NumberSeriesResult getSeries(NumberSeriesInput input) {
-
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public SeriesDefinition getSeriesDefinition(Long id) {
+		return definitionRepo.findOne(id);
 	}
 
+	@Override
+	public SeriesDefinition getSeriesDefinitionByName(String name) {
+		return definitionRepo.findByName(name);
+	}
+
+	@Override
+	public boolean deleteSeriesDefinition(Long id) {
+		SeriesDefinition defn = definitionRepo.findOne(id);
+		if ( defn != null){
+			definitionRepo.delete(defn);
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<SeriesDefinition> getAllSeriesDefinitions() {
+		return definitionRepo.findAll();
+	}
+
+	@Override
+	public Page<SeriesDefinition> getSeriesDefinitions(Pageable pageable) {
+		return definitionRepo.findAll(pageable);
+	}
+	
 	public List<Integer> generateSeries(int firstNumber, int step, int increment, int total, int level, String rule) {
 
 		List<Integer> numberList = new ArrayList<Integer>();
@@ -138,7 +172,7 @@ public class AppxServiceImpl implements AppxService {
 			// numSeries.setStep(step);
 			// numSeries.setSeries(numberList.toString());
 			//
-			defnRepo.save(numSeries);
+			definitionRepo.save(numSeries);
 
 		}
 
@@ -161,12 +195,6 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public List<SeriesDefinition> getNumberSeriesList() {
-
-		return defnRepo.findAll();
-	}
-
-	@Override
 	public List<SeriesDefinition> findByRule(String rule) {
 		// TODO Auto-generated method stub
 		return null;
@@ -174,28 +202,28 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public List<SeriesDefinition> findByRuleAndLevel(String rule, int level) {
-		return null;// return defnRepo.findByRuleAndLevel(rule, level);
+		return null;// return definitionRepo.findByRuleAndLevel(rule, level);
 	}
 
 	@Override
 	public List<SeriesDefinition> findByStartAndStep(int start, int step) {
-		return null;// return defnRepo.findByStartAndStep(start, step);
+		return null;// return definitionRepo.findByStartAndStep(start, step);
 	}
 
 	@Override
 	public List<SeriesDefinition> findByLevel(int level) {
-		return null;// return defnRepo.findByLevel(level);
+		return null;// return definitionRepo.findByLevel(level);
 
 	}
 
 	@Override
 	public List<SeriesDefinition> findByStart(int start) {
-		return null;// return defnRepo.findByStart(start);
+		return null;// return definitionRepo.findByStart(start);
 	}
 
 	@Override
 	public List<SeriesDefinition> findByTotal(int total) {
-		return null;// return defnRepo.findByTotal(total);
+		return null;// return definitionRepo.findByTotal(total);
 	}
 
 	@Override
@@ -251,7 +279,7 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public SeriesDefinition saveDefinition(SeriesDefinition defn) {
-		return defnRepo.save(defn);
+		return definitionRepo.save(defn);
 	}
 
 	@Override
@@ -271,7 +299,7 @@ public class AppxServiceImpl implements AppxService {
 			defn.setSeries(sset);
 		}
 
-		defnRepo.save(defn);
+		definitionRepo.save(defn);
 
 		return series;
 
@@ -327,7 +355,7 @@ public class AppxServiceImpl implements AppxService {
 
 		Long defId = definition.getId();
 
-		definition = defnRepo.findOne(defId);
+		definition = definitionRepo.findOne(defId);
 
 		series.setDefintion(definition);
 
@@ -343,7 +371,7 @@ public class AppxServiceImpl implements AppxService {
 			definition.setSeries(sset);
 		}
 
-		defnRepo.save(definition);
+		definitionRepo.save(definition);
 
 		return series;
 	}
@@ -352,5 +380,6 @@ public class AppxServiceImpl implements AppxService {
 	public Series saveSeries(SeriesDefinition definition, String startNo) {
 		return saveSeries(definition, startNo, 1);
 	}
+
 
 }

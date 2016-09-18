@@ -1,5 +1,7 @@
 package com.appx.work.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +17,46 @@ import com.appx.work.service.AppxService;
 
 @RestController
 @RequestMapping(value = "/rest/appx/series")
-public class AppxSeriesController {
+public class SeriesController {
 
 	@Autowired
 	private AppxService service;
 
-	static Logger logger = LoggerFactory.getLogger(AppxSeriesController.class);
+	static Logger logger = LoggerFactory.getLogger(SeriesController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public SeriesDefinition getSeries(@RequestBody SeriesDefinition defn) {
-		return service.saveDefinition(defn);
+	public Series add(@RequestBody Series series) {
+		return service.createSeries(series);
+	}
+
+	@RequestMapping(method = RequestMethod.PATCH)
+	public Series update(@RequestBody Series series) {
+
+		return service.udpateSeries(series);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public Series delete(@PathVariable("id") long id) {
+		return service.deleteSeries(id);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public Series get(@PathVariable("id") long id) {
+		return service.getSeries(id);
+	}
+
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Series> getAllSeries() {
+		return service.getAllSeries();
+
 	}
 
 	@RequestMapping(value = "/{defId}/{start}/{increment}", method = RequestMethod.GET)
-	public Series saveSeries(@PathVariable("defId") Long defId, @PathVariable("start") int start,
+	public Series createSeries(@PathVariable("defId") Long defId, @PathVariable("start") int start,
 			@PathVariable("increment") int increment) {
 
-		SeriesDefinition definition = service.getNumberSeriesById(defId);
-		
+		SeriesDefinition definition = service.getSeriesDefinition(defId);
+
 		Series series = null;
 		if (definition != null) {
 
@@ -42,5 +66,4 @@ public class AppxSeriesController {
 
 		return series;
 	}
-
 }

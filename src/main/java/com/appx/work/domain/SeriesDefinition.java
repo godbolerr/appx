@@ -67,7 +67,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * 
 	 */
 	@Size(max = 255)
-	String startNumber;
+	String startNumber = "-999";
 
 	/**
 	 * Comma separated list of variable values applicable.
@@ -90,6 +90,16 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 			@JoinColumn(name = "defn_id", referencedColumnName = "id") }, inverseJoinColumns = {
 					@JoinColumn(name = "ser_id", referencedColumnName = "id") })
 	private Set<Series> series;
+
+	public SeriesDefinition() {
+	}
+
+	public SeriesDefinition(String name, String encodedSeries) {
+
+		this.name = name;
+		this.encodedSeries = encodedSeries;
+
+	}
 
 	/**
 	 * @return the id
@@ -181,8 +191,6 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 		this.encodedSeries = encodedSeries;
 	}
 
-	
-
 	/**
 	 * @return the startNumber
 	 */
@@ -191,7 +199,8 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param startNumber the startNumber to set
+	 * @param startNumber
+	 *            the startNumber to set
 	 */
 	public void setStartNumber(String startNumber) {
 		this.startNumber = startNumber;
@@ -255,12 +264,11 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	}
 
 	/**
-	 * @param series the series to set
+	 * @param series
+	 *            the series to set
 	 */
 	public void setSeries(Set<Series> series) {
 		this.series = series;
 	}
 
-	
-	
 }

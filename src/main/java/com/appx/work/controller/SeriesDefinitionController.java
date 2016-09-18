@@ -15,38 +15,38 @@ import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.service.AppxService;
 
 @RestController
-@RequestMapping(value = "/rest/appx/numseries")
-public class AppxNumberSeriesController {
+@RequestMapping(value = "/rest/appx/seriesdefn")
+public class SeriesDefinitionController {
 
 	@Autowired
 	private AppxService service;
 
-	static Logger logger = LoggerFactory.getLogger(AppxNumberSeriesController.class);
+	static Logger logger = LoggerFactory.getLogger(SeriesDefinitionController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
 	public SeriesDefinition addNumberSeries(@RequestBody SeriesDefinition seriesDefn) {
-		return service.addNumberSeries(seriesDefn);
+		return service.createSeriesDefinition(seriesDefn);
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH)
 	public SeriesDefinition editNumberSeries(@RequestBody SeriesDefinition seriesDefn) {
 
-		return service.updateNumberSeries(seriesDefn);
+		return service.updateSeriesDefinition(seriesDefn);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public boolean deleteNumberSeries(@PathVariable("id") long id) {
-		return service.deleteNumberSeries(id);
+		return service.deleteSeriesDefinition(id);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public SeriesDefinition getNumberSeries(@PathVariable("id") long id) {
-		return service.getNumberSeriesById(id);
+		return service.getSeriesDefinition(id);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
 	public List<SeriesDefinition> getNumberSeriesList() {
-		return service.getNumberSeriesList();
+		return service.getAllSeriesDefinitions();
 
 	}
 

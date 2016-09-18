@@ -10,28 +10,35 @@ import org.springframework.data.domain.Pageable;
 
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
-import com.appx.work.to.NumberSeriesInput;
-import com.appx.work.to.NumberSeriesResult;
 
 public interface AppxService {
 	
-	public SeriesDefinition addNumberSeries(SeriesDefinition numSeries);
+	
+	// Series specific operations.
+	
+	Series createSeries(Series series);
+	
+	Series udpateSeries(Series series);
+	
+	Series deleteSeries(Long id);
 
-	public SeriesDefinition updateNumberSeries(SeriesDefinition numSeries);
+	Series getSeries(Long id);
+	
+	 List<Series> getAllSeries();
+	 
+	 public SeriesDefinition createSeriesDefinition(SeriesDefinition defn);
 
-	public SeriesDefinition getNumberSeriesById(Long numSeriesId);
+	public SeriesDefinition updateSeriesDefinition(SeriesDefinition defn);
 
-	public SeriesDefinition getNumberSeriesByName(String numSeriesName);
+	public SeriesDefinition getSeriesDefinition(Long id);
 
-	public boolean deleteNumberSeries(Long numSeriesId);
+	public SeriesDefinition getSeriesDefinitionByName(String name);
 
-	public List<SeriesDefinition> getNumberSeriesList();
+	public boolean deleteSeriesDefinition(Long id);
 
-	Page<SeriesDefinition> getPagedNumberSeriess(Pageable pageable);
+	public List<SeriesDefinition> getAllSeriesDefinitions();
 
-	// Calculate number series based on the script provided.
-
-	NumberSeriesResult getSeries(NumberSeriesInput input);
+	Page<SeriesDefinition> getSeriesDefinitions(Pageable pageable);
 	
 	public List<Integer> generateSeries(int start,int step,int increment,int total, int level, String rule);
 	

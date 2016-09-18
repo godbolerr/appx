@@ -21,7 +21,7 @@ import com.appx.work.domain.SeriesDefinition;
 @ContextConfiguration(classes = { EmptyConfig.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SaveSeriesTest extends Assert {
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(SaveSeriesTest.class);
 
 	@Autowired
@@ -51,7 +51,7 @@ public class SaveSeriesTest extends Assert {
 
 		LOGGER.debug(ser.toString());
 
-		SeriesDefinition sdef = appxService.getNumberSeriesById(def.getId());
+		SeriesDefinition sdef = appxService.getSeriesDefinition(def.getId());
 
 		LOGGER.debug(sdef.toString());
 
@@ -75,18 +75,18 @@ public class SaveSeriesTest extends Assert {
 		startNos.add("100");
 
 		for (Iterator<String> iterator = startNos.iterator(); iterator.hasNext();) {
-			String startNo =  iterator.next();
+			String startNo = iterator.next();
 
 			Series series = appxService.saveSeries(def, startNo);
 
 			assertTrue(series != null);
 			assertTrue(series.getId() > 0);
 		}
-		
-		def = appxService.getNumberSeriesById(def.getId());
-		
+
+		def = appxService.getSeriesDefinition(def.getId());
+
 		int totalSeries = def.getSeries().size();
-		
+
 		assertTrue(totalSeries == 3);
 
 	}
