@@ -1,5 +1,7 @@
 package com.appx.work.service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
@@ -15,12 +17,12 @@ import com.appx.work.config.EmptyConfig;
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 
-import ch.qos.logback.core.net.SyslogOutputStream;
-
 // 
 @ContextConfiguration(classes = { EmptyConfig.class })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SaveSeriesTest extends Assert {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(SaveSeriesTest.class);
 
 	@Autowired
 	AppxService appxService;
@@ -35,7 +37,7 @@ public class SaveSeriesTest extends Assert {
 		String result = appxService.generate(def);
 
 		assertTrue(result != null);
-		assertTrue("1,2,3,4,5,6,?".equals(result));
+		assertTrue("1,2,3,4,5,6".equals(result));
 
 		def = appxService.saveDefinition(def);
 
@@ -47,11 +49,45 @@ public class SaveSeriesTest extends Assert {
 
 		assertTrue(ser.getId() > 0);
 
-		System.out.println(ser);
+		LOGGER.debug(ser.toString());
 
 		SeriesDefinition sdef = appxService.getNumberSeriesById(def.getId());
 
-		System.out.println(sdef);
+		LOGGER.debug(sdef.toString());
+
+	}
+
+	@Test
+	public void simpleSeries2() {
+
+		SeriesDefinition def = new SeriesDefinition();
+		def.setStartNumber("1");
+		def.setEncodedSeries("x, x1+1 , x1+2, x1+3, x1+4, x1+5 ");
+
+		def = appxService.saveDefinition(def);
+
+		assertTrue(def != null);
+		assertTrue(def.getId() > 0);
+
+		List<String> startNos = new ArrayList<String>();
+		startNos.add("2");
+		startNos.add("10");
+		startNos.add("100");
+
+		for (Iterator<String> iterator = startNos.iterator(); iterator.hasNext();) {
+			String startNo =  iterator.next();
+
+			Series series = appxService.saveSeries(def, startNo);
+
+			assertTrue(series != null);
+			assertTrue(series.getId() > 0);
+		}
+		
+		def = appxService.getNumberSeriesById(def.getId());
+		
+		int totalSeries = def.getSeries().size();
+		
+		assertTrue(totalSeries == 3);
 
 	}
 

@@ -39,8 +39,13 @@ public interface AppxService {
 	
 	public List<String> generate(SeriesDefinition definition,List<String> startNos);
 	
+	public String generate(SeriesDefinition definition,String startNo,int increment);
+	
 	public List<String> generate(SeriesDefinition definition,List<String> startNos,int increment);
 	
+	public Series saveSeries(SeriesDefinition definition,String startNo);
+	
+	public Series saveSeries(SeriesDefinition definition,String startNo,int increment);
 	
 	// Finder methods
 	

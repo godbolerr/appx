@@ -234,7 +234,7 @@ public class AppxServiceImpl implements AppxService {
 			jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
 			JexlScript e = jexl.createScript(rule);
 			e.execute(jexlContext);
-			LOGGER.debug(sourceData.toString());
+			LOGGER.debug(rule + ": " + sourceData.toString());
 
 			String series = "";
 			for (int j = 1; j <= rArray.length; j++) {
@@ -304,6 +304,53 @@ public class AppxServiceImpl implements AppxService {
 		}
 
 		return generatedSeries;
+	}
+
+	@Override
+	public String generate(SeriesDefinition definition, String startNo, int increment) {
+		definition.setStartNumber(startNo);
+		definition.setIncrement(increment);
+		return generate(definition);
+	}
+
+	@Override
+	public Series saveSeries(SeriesDefinition definition, String startNo, int increment) {
+
+		definition.setStartNumber(startNo);
+		definition.setIncrement(increment);
+		String result = generate(definition);
+
+		Series series = new Series();
+		series.setStart(startNo);
+		series.setSeries(result);
+		series.setIncrement(increment + "");
+
+		Long defId = definition.getId();
+
+		definition = defnRepo.findOne(defId);
+
+		series.setDefintion(definition);
+
+		seriesRepo.save(series);
+
+		Set<Series> sset = definition.getSeries();
+
+		if (sset != null) {
+			sset.add(series);
+		} else {
+			sset = new HashSet<Series>();
+			sset.add(series);
+			definition.setSeries(sset);
+		}
+
+		defnRepo.save(definition);
+
+		return series;
+	}
+
+	@Override
+	public Series saveSeries(SeriesDefinition definition, String startNo) {
+		return saveSeries(definition, startNo, 1);
 	}
 
 }

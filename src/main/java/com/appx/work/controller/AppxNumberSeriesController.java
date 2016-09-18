@@ -24,14 +24,14 @@ public class AppxNumberSeriesController {
 	static Logger logger = LoggerFactory.getLogger(AppxNumberSeriesController.class);
 
 	@RequestMapping(method = RequestMethod.POST)
-	public SeriesDefinition addNumberSeries(@RequestBody SeriesDefinition catalogue) {
-		return service.addNumberSeries(catalogue);
+	public SeriesDefinition addNumberSeries(@RequestBody SeriesDefinition seriesDefn) {
+		return service.addNumberSeries(seriesDefn);
 	}
 
 	@RequestMapping(method = RequestMethod.PATCH)
-	public SeriesDefinition editNumberSeries(@RequestBody SeriesDefinition catalogue) {
+	public SeriesDefinition editNumberSeries(@RequestBody SeriesDefinition seriesDefn) {
 
-		return service.updateNumberSeries(catalogue);
+		return service.updateNumberSeries(seriesDefn);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -78,54 +78,6 @@ public class AppxNumberSeriesController {
 	@RequestMapping(value = "ruleByTotal/{total}", method = RequestMethod.GET)
 	List<SeriesDefinition> findByTotal(@PathVariable("total") int total) {
 		return service.findByTotal(total);
-	}
-
-	@RequestMapping(value = "seedRules", method = RequestMethod.GET)
-	int seedRules() {
-
-		String[] rules = {
-
-				// Square series
-				"s.x = s.x * s.x ;",
-
-				// Cube series
-				"s.x = s.x * s.x ; ",
-
-				// Increment by number
-				"s.x = s.x + s.increment;",
-
-				// Add with increment multiplied
-				"s.x = s.x + 2 * s.increment ;"
-
-		};
-
-		for (int i = 0; i < rules.length; i++) {
-
-			String currentRule = rules[i];
-
-			// Start
-
-			for (int j = 1; j < 8; j++) {
-
-				// Step
-				for (int j2 = 2; j2 < 7; j2++) {
-
-					// total
-
-					for (int k = 5; k < 10; k++) {
-
-						service.generateSeries(j, j2, 2, k, 3, currentRule);
-
-					}
-
-				}
-
-			}
-
-		}
-
-		return 100;
-
 	}
 
 }
