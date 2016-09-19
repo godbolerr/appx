@@ -43,10 +43,7 @@ public class Series extends BaseEntity {
 
 	private String options;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "defn_id")
-	@JsonIgnore
-	private SeriesDefinition defintion;
+	private Long defintionId;
 
 	/**
 	 * @return the id
@@ -63,19 +60,19 @@ public class Series extends BaseEntity {
 		this.id = id;
 	}
 
+	
 	/**
-	 * @return the defintion
+	 * @return the defintionId
 	 */
-	public SeriesDefinition getDefintion() {
-		return defintion;
+	public Long getDefintionId() {
+		return defintionId;
 	}
 
 	/**
-	 * @param defintion
-	 *            the defintion to set
+	 * @param defintionId the defintionId to set
 	 */
-	public void setDefintion(SeriesDefinition defintion) {
-		this.defintion = defintion;
+	public void setDefintionId(Long defintionId) {
+		this.defintionId = defintionId;
 	}
 
 	/**

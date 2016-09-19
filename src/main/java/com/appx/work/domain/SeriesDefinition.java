@@ -85,12 +85,6 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 */
 	int increment = 1;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "APPX_DEFN_SERIES", joinColumns = {
-			@JoinColumn(name = "defn_id", referencedColumnName = "id") }, inverseJoinColumns = {
-					@JoinColumn(name = "ser_id", referencedColumnName = "id") })
-	private Set<Series> series;
-
 	public SeriesDefinition() {
 	}
 
@@ -254,21 +248,6 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
-	}
-
-	/**
-	 * @return the series
-	 */
-	public Set<Series> getSeries() {
-		return series;
-	}
-
-	/**
-	 * @param series
-	 *            the series to set
-	 */
-	public void setSeries(Set<Series> series) {
-		this.series = series;
 	}
 
 }

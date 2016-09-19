@@ -245,28 +245,17 @@ public class AppxServiceImpl implements AppxService {
 		String sequence = theSeries.getSeries();
 
 		List<Series> seriesList = getSeriesList(sequence, theSeries.getStart(), theSeries.getIncrement());
-		
+
 		Set<Series> sset = null;
 
 		for (Iterator iterator = seriesList.iterator(); iterator.hasNext();) {
 			Series series = (Series) iterator.next();
 
-			series.setDefintion(defn);
+			series.setDefintionId(defn.getId());
 
 			seriesRepo.save(series);
-
-			sset = defn.getSeries();
-
-			if (sset != null) {
-				sset.add(series);
-			} else {
-				sset = new HashSet<Series>();
-				sset.add(series);
-
-			}
-			defn.setSeries(sset);
 		}
-		
+
 		definitionRepo.save(defn);
 
 		return seriesList;
@@ -325,7 +314,7 @@ public class AppxServiceImpl implements AppxService {
 
 		definition = definitionRepo.findOne(defId);
 
-		return saveSeries(definition,series);
+		return saveSeries(definition, series);
 	}
 
 	@Override
