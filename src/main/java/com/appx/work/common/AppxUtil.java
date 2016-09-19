@@ -320,8 +320,12 @@ public class AppxUtil {
 
 				SeriesDefinition defn = new SeriesDefinition();
 				BeanUtils.copyProperties(definition, defn);
-				Series series = service.saveSeries(defn, startNo, increment);
-				result.add(series.getId());
+				List<Series> seriesList = service.saveSeries(defn, startNo, increment);
+				for (Iterator iterator = seriesList.iterator(); iterator.hasNext();) {
+					Series series = (Series) iterator.next();
+					result.add(series.getId());	
+				}
+				
 			}
 
 		}

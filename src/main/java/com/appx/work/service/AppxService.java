@@ -51,9 +51,9 @@ public interface AppxService {
 	
 	public List<String> generate(SeriesDefinition definition,List<String> startNos,int increment);
 	
-	public Series saveSeries(SeriesDefinition definition,String startNo);
+	public List<Series> saveSeries(SeriesDefinition definition,String startNo);
 	
-	public Series saveSeries(SeriesDefinition definition,String startNo,int increment);
+	public List<Series> saveSeries(SeriesDefinition definition,String startNo,int increment);
 	
 	// Finder methods
 	
@@ -71,7 +71,7 @@ public interface AppxService {
 	
 	SeriesDefinition saveDefinition(SeriesDefinition defn);
 	
-	Series saveSeries(SeriesDefinition defn,Series series);
+	List<Series> saveSeries(SeriesDefinition defn,Series series);
 	
 	
 	

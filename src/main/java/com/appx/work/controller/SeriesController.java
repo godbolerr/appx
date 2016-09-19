@@ -45,7 +45,7 @@ public class SeriesController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public SeriesTO get(@PathVariable("id") long id) {
-		
+
 		return service.getSeries(id);
 	}
 
@@ -56,21 +56,23 @@ public class SeriesController {
 	}
 
 	@RequestMapping(value = "/defn/{defId}/{start}/{increment}", method = RequestMethod.GET)
-	public Series createSeries(@PathVariable("defId") Long defId, @PathVariable("start") int start,
+	public List<Series> createSeries(@PathVariable("defId") Long defId, @PathVariable("start") int start,
 			@PathVariable("increment") int increment) {
+
+		List<Series> seriesList = null;
 
 		SeriesDefinitionTO definition = service.getSeriesDefinition(defId);
 
 		Series series = null;
 		if (definition != null) {
-			
+
 			SeriesDefinition defn = new SeriesDefinition();
 			BeanUtils.copyProperties(definition, defn);
-			
-			series = service.saveSeries(defn, start + "", increment);
+
+			seriesList = service.saveSeries(defn, start + "", increment);
 
 		}
 
-		return series;
+		return seriesList;
 	}
 }

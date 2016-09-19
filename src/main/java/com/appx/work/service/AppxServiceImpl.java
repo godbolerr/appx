@@ -79,15 +79,15 @@ public class AppxServiceImpl implements AppxService {
 		SeriesTO sto = new SeriesTO();
 		Series series = seriesRepo.findOne(id);
 		sto.setDefintion(new SeriesDefinitionTO());
-		BeanUtils.copyProperties(series,sto);
-		//BeanUtils.copyProperties(series.getDefintion().getId(),sto.getDefintion().getId());
+		BeanUtils.copyProperties(series, sto);
+		// BeanUtils.copyProperties(series.getDefintion().getId(),sto.getDefintion().getId());
 		return sto;
 	}
 
 	@Override
 	public List<SeriesTO> getAllSeries() {
 		List<SeriesTO> stoList = new ArrayList<SeriesTO>();
-		BeanUtils.copyProperties(seriesRepo.findAll(),stoList);
+		BeanUtils.copyProperties(seriesRepo.findAll(), stoList);
 		return stoList;
 	}
 
@@ -104,21 +104,21 @@ public class AppxServiceImpl implements AppxService {
 	@Override
 	public SeriesDefinitionTO getSeriesDefinition(Long id) {
 		SeriesDefinitionTO sto = new SeriesDefinitionTO();
-		BeanUtils.copyProperties(definitionRepo.findOne(id),sto);
+		BeanUtils.copyProperties(definitionRepo.findOne(id), sto);
 		return sto;
 	}
 
 	@Override
 	public SeriesDefinitionTO getSeriesDefinitionByName(String name) {
 		SeriesDefinitionTO sto = new SeriesDefinitionTO();
-		BeanUtils.copyProperties(definitionRepo.findByName(name),sto);
+		BeanUtils.copyProperties(definitionRepo.findByName(name), sto);
 		return sto;
 	}
 
 	@Override
 	public boolean deleteSeriesDefinition(Long id) {
 		SeriesDefinition defn = definitionRepo.findOne(id);
-		if ( defn != null){
+		if (defn != null) {
 			definitionRepo.delete(defn);
 			return true;
 		}
@@ -134,7 +134,7 @@ public class AppxServiceImpl implements AppxService {
 	public Page<SeriesDefinition> getSeriesDefinitions(Pageable pageable) {
 		return definitionRepo.findAll(pageable);
 	}
-	
+
 	public static class EnhancedContext extends JexlEvalContext {
 		int factor = 6;
 		final Map<String, Object> funcs;
@@ -240,25 +240,36 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public Series saveSeries(SeriesDefinition defn, Series series) {
+	public List<Series> saveSeries(SeriesDefinition defn, Series theSeries) {
 
-		series.setDefintion(defn);
+		String sequence = theSeries.getSeries();
 
-		seriesRepo.save(series);
+		List<Series> seriesList = getSeriesList(sequence, theSeries.getStart(), theSeries.getIncrement());
+		
+		Set<Series> sset = null;
 
-		Set<Series> sset = defn.getSeries();
+		for (Iterator iterator = seriesList.iterator(); iterator.hasNext();) {
+			Series series = (Series) iterator.next();
 
-		if (sset != null) {
-			sset.add(series);
-		} else {
-			sset = new HashSet<Series>();
-			sset.add(series);
+			series.setDefintion(defn);
+
+			seriesRepo.save(series);
+
+			sset = defn.getSeries();
+
+			if (sset != null) {
+				sset.add(series);
+			} else {
+				sset = new HashSet<Series>();
+				sset.add(series);
+
+			}
 			defn.setSeries(sset);
 		}
-
+		
 		definitionRepo.save(defn);
 
-		return series;
+		return seriesList;
 
 	}
 
@@ -299,7 +310,7 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public Series saveSeries(SeriesDefinition definition, String startNo, int increment) {
+	public List<Series> saveSeries(SeriesDefinition definition, String startNo, int increment) {
 
 		definition.setStartNumber(startNo);
 		definition.setIncrement(increment);
@@ -314,29 +325,54 @@ public class AppxServiceImpl implements AppxService {
 
 		definition = definitionRepo.findOne(defId);
 
-		series.setDefintion(definition);
-
-		seriesRepo.save(series);
-
-		Set<Series> sset = definition.getSeries();
-
-		if (sset != null) {
-			sset.add(series);
-		} else {
-			sset = new HashSet<Series>();
-			sset.add(series);
-			definition.setSeries(sset);
-		}
-
-		definitionRepo.save(definition);
-
-		return series;
+		return saveSeries(definition,series);
 	}
 
 	@Override
-	public Series saveSeries(SeriesDefinition definition, String startNo) {
+	public List<Series> saveSeries(SeriesDefinition definition, String startNo) {
 		return saveSeries(definition, startNo, 1);
 	}
 
+	private List<Series> getSeriesList(String sequence, String startNo, String increment) {
+
+		List<Series> seriesList = new ArrayList<Series>();
+
+		String[] item = sequence.split(",");
+
+		String newSeries = "";
+
+		String options = "";
+
+		for (int i = 0; i < item.length; i++) {
+			String answer = "";
+			StringBuffer sb = new StringBuffer();
+			item = sequence.split(",");
+			for (int j = 0; j < item.length; j++) {
+				if (i == j) {
+					answer = item[j];
+					item[j] = "*";
+					options = answer + "," + (Integer.parseInt(answer) - 1) + "," + (Integer.parseInt(answer) + 1);
+				}
+				sb.append(item[j]);
+				sb.append(",");
+			}
+
+			Series series = new Series();
+			series.setAnswer(answer);
+			series.setOptions(options);
+
+			String newSequence = sb.toString();
+			newSequence = newSequence.substring(0, newSequence.lastIndexOf(","));
+
+			series.setSeries(newSequence);
+			series.setStart(startNo);
+			series.setIncrement(increment);
+
+			seriesList.add(series);
+		}
+
+		return seriesList;
+
+	}
 
 }
