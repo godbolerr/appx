@@ -42,7 +42,6 @@ public interface AppxService {
 
 	Page<SeriesDefinition> getSeriesDefinitions(Pageable pageable);
 	
-	public List<Integer> generateSeries(int start,int step,int increment,int total, int level, String rule);
 	
 	public String generate(SeriesDefinition definition);
 	

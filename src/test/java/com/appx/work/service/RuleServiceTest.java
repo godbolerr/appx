@@ -1,7 +1,5 @@
 package com.appx.work.service;
 
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.appx.work.common.AppxUtil;
 import com.appx.work.config.EmptyConfig;
 import com.appx.work.domain.SeriesDefinition;
 
@@ -25,11 +24,20 @@ public class RuleServiceTest extends Assert {
 	AppxService appxService;
 
 	@Test
+	public void readFromFile() {
+
+		AppxUtil.service = appxService;
+		System.out.println(AppxUtil.loadDefinitionsFromFile());
+
+	}
+
+	
+	@Test
 	public void simpleSeries1() {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
-		def.setEncodedSeries("x, x1+1 , x1+2, x1+3, x1+4, x1+5 ");
+		def.setEncodedSeries("x, x+1 , x+2, x+3, x+4, x+5 ");
 
 		String result = appxService.generate(def);
 
@@ -44,7 +52,7 @@ public class RuleServiceTest extends Assert {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
-		def.setEncodedSeries("x, x1+1 , x1+2, x1+3, x1+4 ");
+		def.setEncodedSeries("x, x+1 , x+2, x+3, x+4 ");
 
 		String result = appxService.generate(def);
 
@@ -59,7 +67,7 @@ public class RuleServiceTest extends Assert {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
-		def.setEncodedSeries("x, x1+1 ");
+		def.setEncodedSeries("x, x+1 ");
 
 		String result = appxService.generate(def);
 
@@ -74,7 +82,7 @@ public class RuleServiceTest extends Assert {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
-		def.setEncodedSeries("x, x1+1 , x1+2, x1+3, x1+4, x1+5 ");
+		def.setEncodedSeries("x, x+1 , x+2, x+3, x+4, x+5 ");
 
 		String result = appxService.generate(def);
 
@@ -90,7 +98,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setEncodedSeries(
-				"x, (x1+1) * (x1+1) , (x1+2) * (x1+2) , (x1+3) * (x1+3) , (x1+4) * (x1+4) , (x1+5) * (x1+5) ");
+				"x, (x+1) * (x+1) , (x+2) * (x+2) , (x+3) * (x+3) , (x+4) * (x+4) , (x+5) * (x+5) ");
 
 		String result = appxService.generate(def);
 
@@ -100,12 +108,28 @@ public class RuleServiceTest extends Assert {
 	}
 
 	@Test
+	public void squareSeriesStartsWithTwo() {
+
+		SeriesDefinition def = new SeriesDefinition();
+		def.setStartNumber("2");
+		def.setEncodedSeries(
+				"x * x , (x+1) * (x+1) , (x+2) * (x+2) , (x+3) * (x+3) , (x+4) * (x+4) , (x+5) * (x+5) ");
+
+		String result = appxService.generate(def);
+
+		assertTrue(result != null);
+
+		assertTrue("4,9,16,25,36,49".equals(result));
+	}
+	
+	
+	@Test
 	public void cubeSeries() {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setEncodedSeries(
-				"x, (x1+1) * (x1+1) * (x1+1) , (x1+2) * (x1+2) * (x1+2) , (x1+3) * (x1+3) * (x1+3), (x1+4) * (x1+4) * (x1+4), (x1+5) * (x1+5)* (x1+5) ");
+				"x, (x+1) * (x+1) * (x+1) , (x+2) * (x+2) * (x+2) , (x+3) * (x+3) * (x+3), (x+4) * (x+4) * (x+4), (x+5) * (x+5)* (x+5) ");
 
 		String result = appxService.generate(def);
 
@@ -120,7 +144,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setEncodedSeries(
-				"x, (x1+1) * (x1+1) +n , (x1+2) * (x1+2) + n , (x1+3) * (x1+3) +n , (x1+4) * (x1+4) +n  , (x1+5) * (x1+5) +n ");
+				"x, (x+1) * (x+1) +n , (x+2) * (x+2) + n , (x+3) * (x+3) +n , (x+4) * (x+4) +n  , (x+5) * (x+5) +n ");
 
 		String result = appxService.generate(def);
 
@@ -135,7 +159,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setEncodedSeries(
-				"x, (x1+1) * (x1+1) - n , (x1+2) * (x1+2) - n , (x1+3) * (x1+3) - n , (x1+4) * (x1+4) - n  , (x1+5) * (x1+5) - n ");
+				"x, (x+1) * (x+1) - n , (x+2) * (x+2) - n , (x+3) * (x+3) - n , (x+4) * (x+4) - n  , (x+5) * (x+5) - n ");
 
 		String result = appxService.generate(def);
 
@@ -151,7 +175,7 @@ public class RuleServiceTest extends Assert {
 		def.setStartNumber("1");
 		def.setIncrement(2);
 		def.setEncodedSeries(
-				"x, (x1+1) * (x1+1) - n , (x1+2) * (x1+2) - n , (x1+3) * (x1+3) - n , (x1+4) * (x1+4) - n  , (x1+5) * (x1+5) - n ");
+				"x, (x+1) * (x+1) - n , (x+2) * (x+2) - n , (x+3) * (x+3) - n , (x+4) * (x+4) - n  , (x+5) * (x+5) - n ");
 
 		String result = appxService.generate(def);
 
@@ -166,7 +190,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setIncrement(2);
-		def.setEncodedSeries("x, (x1+1) *  n , (x1+2) *  n , (x1+3) *  n , (x1+4) *  n  , (x1+5) * n ");
+		def.setEncodedSeries("x, (x+1) *  n , (x+2) *  n , (x+3) *  n , (x+4) *  n  , (x+5) * n ");
 
 		String result = appxService.generate(def);
 
@@ -181,7 +205,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setIncrement(3);
-		def.setEncodedSeries("x, (x1+1) *  n , (x1+2) *  n , (x1+3) *  n , (x1+4) *  n  , (x1+5) * n ");
+		def.setEncodedSeries("x, (x+1) *  n , (x+2) *  n , (x+3) *  n , (x+4) *  n  , (x+5) * n ");
 
 		String result = appxService.generate(def);
 
@@ -199,7 +223,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("10000");
 		def.setIncrement(1);
-		def.setEncodedSeries("x, x1/2, x1/4, x1/6, x1/8 , x1/16");
+		def.setEncodedSeries("x, x/2, x/4, x/6, x/8 , x/16");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -216,7 +240,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("1");
 		def.setIncrement(2);
-		def.setEncodedSeries("x, x1 + 5, x1 + n, x2 + n, x3 + n ,x4 + n,x5 + n,x6 + n");
+		def.setEncodedSeries("x, x + 5, x + n, x2 + n, x3 + n ,x4 + n,x5 + n,x6 + n");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -233,7 +257,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("36");
 		def.setIncrement(2);
-		def.setEncodedSeries("x, x1 -n , x2 -n , x3 - n , x4 -n , x5 - n");
+		def.setEncodedSeries("x, x -n , x2 -n , x3 - n , x4 -n , x5 - n");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -250,7 +274,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("10");
 		def.setIncrement(2);
-		def.setEncodedSeries("x, x1 + 5, x1 + n, x2 - n, x3 + n, x4 - n, x5 + n , x6 - n ");
+		def.setEncodedSeries("x, x + 5, x + n, x2 - n, x3 + n, x4 - n, x5 + n , x6 - n ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -265,7 +289,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("36");
 		def.setIncrement(2);
-		def.setEncodedSeries("x , x1 - n , x2 - 2 * n , x3 - n , x4 - 2 *n , x5 - n , x6 - 2 * n  ");
+		def.setEncodedSeries("x , x - n , x2 - 2 * n , x3 - n , x4 - 2 *n , x5 - n , x6 - 2 * n  ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -280,7 +304,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("36");
 		def.setIncrement(7);
-		def.setEncodedSeries("x , x1 , x2 - n , x2 - n , x3 - n , x3 - n , x5 - n , x5 -n  ");
+		def.setEncodedSeries("x , x , x2 - n , x2 - n , x3 - n , x3 - n , x5 - n , x5 -n  ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -295,7 +319,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("36");
 		def.setIncrement(7);
-		def.setEncodedSeries("x , x1 + n , x1 , x2 + n , x1 , x4 + n , x1 ");
+		def.setEncodedSeries("x , x + n , x , x2 + n , x , x4 + n , x ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -310,7 +334,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("36");
 		def.setIncrement(2);
-		def.setEncodedSeries("x , x1 - n , x2 - 2 * n , x3 - n , x4 - 2 * n , x5 - n ");
+		def.setEncodedSeries("x , x - n , x2 - 2 * n , x3 - n , x4 - 2 * n , x5 - n ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -325,7 +349,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("10");
 		def.setIncrement(2);
-		def.setEncodedSeries("x , x1 * n , x1 + 7 , x3 * n , x3 + 7 , x5 * n ");
+		def.setEncodedSeries("x , x * n , x + 7 , x3 * n , x3 + 7 , x5 * n ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -340,7 +364,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("10");
 		def.setIncrement(2);
-		def.setEncodedSeries("x , n , x1 + x2 , n * 2 , x3 + x4 , n * 3, x5 + x6 , n * 4  ");
+		def.setEncodedSeries("x , n , x + x2 , n * 2 , x3 + x4 , n * 3, x5 + x6 , n * 4  ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -355,7 +379,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("2");
 		def.setIncrement(2);
-		def.setEncodedSeries("x , x1 * x1 , x1 * x2 , x2 * x3 , x3 * x4 , x4 * x5 ");
+		def.setEncodedSeries("x , x * x , x * x2 , x2 * x3 , x3 * x4 , x4 * x5 ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -369,7 +393,7 @@ public class RuleServiceTest extends Assert {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("2");
-		def.setEncodedSeries("x , x1 + x1 , x1 + x2 , x2 + x3 , x3 + x4 , x4 + x5 ");
+		def.setEncodedSeries("x , x + x , x + x2 , x2 + x3 , x3 + x4 , x4 + x5 ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);
@@ -384,7 +408,7 @@ public class RuleServiceTest extends Assert {
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("100");
 		def.setIncrement(3);
-		def.setEncodedSeries("x , n,  x1 - n , n * 2 , x1 - x4 , n * 3 , x1 - x6 ");
+		def.setEncodedSeries("x , n,  x - n , n * 2 , x - x4 , n * 3 , x - x6 ");
 
 		String result = appxService.generate(def);
 		LOGGER.debug(result);

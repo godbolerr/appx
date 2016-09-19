@@ -1,6 +1,11 @@
 package com.appx.work.common;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -19,6 +24,52 @@ public class AppxUtil {
 	public static AppxService service;
 
 	public AppxUtil() {
+
+	}
+
+	public static List<Long> loadDefinitionsFromFile() {
+
+		List<Long> definitionIdList = new ArrayList<Long>();
+
+		InputStream is = AppxUtil.class.getResourceAsStream("/rules.csv");
+
+		List<String> exprList = getStringFromInputStream(is);
+
+		for (Iterator iterator = exprList.iterator(); iterator.hasNext();) {
+			String line = (String) iterator.next();
+
+			String[] cols = line.split(",");
+
+			String name = cols[0];
+			String startNum = cols[1];
+			String increment = cols[2];
+			String expression = "";
+
+			for (int i = 3; i < cols.length; i++) {
+				expression = expression + cols[i] + ",";
+			}
+
+			expression = expression.substring(0, expression.lastIndexOf(","));
+
+			System.out.println(name + ":" + startNum + ":" + increment + ":" + expression);
+			
+			SeriesDefinition definition = new SeriesDefinition();
+
+			definition.setName(name);
+			definition.setDescription(name + " description");
+			definition.setEncodedSeries(expression);
+			definition.setExplanation(name + "  Explanation");
+			definition.setLevel(1);
+			definition.setStartNumber(startNum);
+			definition.setIncrement(Integer.parseInt(increment));
+
+			definition = service.saveDefinition(definition);
+			
+			definitionIdList.add(definition.getId());
+
+		}
+
+		return definitionIdList;
 
 	}
 
@@ -276,4 +327,36 @@ public class AppxUtil {
 		}
 
 	}
+
+	private static List<String> getStringFromInputStream(InputStream is) {
+
+		List<String> list = new ArrayList<String>();
+
+		BufferedReader br = null;
+		StringBuilder sb = new StringBuilder();
+
+		String line;
+		try {
+
+			br = new BufferedReader(new InputStreamReader(is));
+			while ((line = br.readLine()) != null) {
+				list.add(line);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return list;
+
+	}
+
 }

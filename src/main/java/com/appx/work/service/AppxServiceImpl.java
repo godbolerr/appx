@@ -135,62 +135,6 @@ public class AppxServiceImpl implements AppxService {
 		return definitionRepo.findAll(pageable);
 	}
 	
-	public List<Integer> generateSeries(int firstNumber, int step, int increment, int total, int level, String rule) {
-
-		List<Integer> numberList = new ArrayList<Integer>();
-		Map<String, Object> sourceData = new HashMap<String, Object>();
-		Map<String, Object> resultMap = new HashMap<String, Object>();
-
-		// Dummy insertion for first run;
-
-		int start = firstNumber;
-
-		sourceData.put("x", new Integer(firstNumber));
-		sourceData.put("firstNumber", new Integer(firstNumber));
-		sourceData.put("totalCount", new Integer(total));
-		sourceData.put("increment", new Integer(increment));
-		sourceData.put("step", new Integer(step));
-
-		Object obj = null;
-
-		EnhancedContext jexlContext = new EnhancedContext(funcs);
-		jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
-		JexlScript e = jexl.createScript(rule);
-
-		for (int i = 1; i <= total; i++) {
-
-			obj = e.execute(jexlContext);
-
-			numberList.add((Integer) sourceData.get("x"));
-			if (step != 0) {
-				firstNumber = firstNumber + step;
-			} else {
-				firstNumber = firstNumber + 1;
-			}
-			sourceData.put("x", firstNumber);
-		}
-
-		resultMap.put(e.toString(), obj);
-		LOGGER.debug("Rule: " + rule + " [" + sourceData + "] " + resultMap.toString());
-
-		if (numberList.size() > 0) {
-			SeriesDefinition numSeries = new SeriesDefinition();
-
-			// numSeries.setIncrement(increment);
-			// numSeries.setLevel(level);
-			// numSeries.setRule(rule);
-			// numSeries.setTotal(total);
-			// numSeries.setStart(start);
-			// numSeries.setStep(step);
-			// numSeries.setSeries(numberList.toString());
-			//
-			definitionRepo.save(numSeries);
-
-		}
-
-		return numberList;
-	}
-
 	public static class EnhancedContext extends JexlEvalContext {
 		int factor = 6;
 		final Map<String, Object> funcs;
@@ -270,6 +214,7 @@ public class AppxServiceImpl implements AppxService {
 			rule = sb.toString();
 			rule = rule.replaceAll("[a-z][0-9]*", "s.$0");
 			sourceData.put("x", Integer.parseInt(startNumber));
+			sourceData.put("x1", Integer.parseInt(startNumber));
 			EnhancedContext jexlContext = new EnhancedContext(funcs);
 			jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
 			JexlScript e = jexl.createScript(rule);
