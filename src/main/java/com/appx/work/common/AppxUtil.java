@@ -82,7 +82,7 @@ public class AppxUtil {
 		definition.setName("IncrementWithOne");
 		definition.setDescription("Each number increments by 1");
 		definition.setEncodedSeries("x, x1+1 , x1+2, x1+3, x1+4, x1+5");
-		definition.setExplanation("Number in the series is incremented by 1");
+		definition.setExplanation("IncrementWithOne.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -96,7 +96,7 @@ public class AppxUtil {
 		definition.setDescription("Square of numbers");
 		definition.setEncodedSeries(
 				"x, (x1+1) * (x1+1) , (x1+2) * (x1+2) , (x1+3) * (x1+3) , (x1+4) * (x1+4) , (x1+5) * (x1+5)");
-		definition.setExplanation("Each number is square of base number. Base number is incremented by 1");
+		definition.setExplanation("SquareSeries.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("");
 
@@ -110,7 +110,7 @@ public class AppxUtil {
 		definition.setDescription("Series of cubes");
 		definition.setEncodedSeries(
 				"x, (x1+1) * (x1+1) * (x1+1) , (x1+2) * (x1+2) * (x1+2) , (x1+3) * (x1+3) * (x1+3), (x1+4) * (x1+4) * (x1+4), (x1+5) * (x1+5)* (x1+5)");
-		definition.setExplanation("Each number is cube of some base number. Base number increments by 1");
+		definition.setExplanation("CubeSeries.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -123,7 +123,7 @@ public class AppxUtil {
 		definition.setDescription("Squares of base number plus increment");
 		definition.setEncodedSeries(
 				"x, (x1+1) * (x1+1) +n , (x1+2) * (x1+2) + n , (x1+3) * (x1+3) +n , (x1+4) * (x1+4) +n  , (x1+5) * (x1+5) +n");
-		definition.setExplanation("Each number is a square of some number plus n added to it.");
+		definition.setExplanation("SquareSeriesPlusN.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -135,7 +135,7 @@ public class AppxUtil {
 		definition.setDescription("Each number is a square of some number with N substracted from it.");
 		definition.setEncodedSeries(
 				"x, (x1+1) * (x1+1) - n , (x1+2) * (x1+2) - n , (x1+3) * (x1+3) - n , (x1+4) * (x1+4) - n  , (x1+5) * (x1+5) - n");
-		definition.setExplanation("Each number is a square of some number with N substracted from it.");
+		definition.setExplanation("SquareSeriesMinusN.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -146,7 +146,7 @@ public class AppxUtil {
 		definition.setName("SeriesMultiplyN");
 		definition.setDescription("Series is multiplied by N");
 		definition.setEncodedSeries("x, (x1+1) *  n , (x1+2) *  n , (x1+3) *  n , (x1+4) *  n  , (x1+5) * n ");
-		definition.setExplanation("Series is multiplied by N");
+		definition.setExplanation("SeriesMultiplyN.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -157,7 +157,7 @@ public class AppxUtil {
 		definition.setName("AlternateIncrease");
 		definition.setDescription("Alternate number increases by n");
 		definition.setEncodedSeries("x, x1 + 5, x1 + n, x2 + n, x3 + n ,x4 + n,x5 + n,x6 + n");
-		definition.setExplanation("Alternate number increases by n");
+		definition.setExplanation("AlternateIncrease.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -168,7 +168,7 @@ public class AppxUtil {
 		definition.setName("DecreasingNumbers");
 		definition.setDescription("");
 		definition.setEncodedSeries("x, x1 -n , x2 -n , x3 - n , x4 -n , x5 - n");
-		definition.setExplanation("Numbers are decreasing by n");
+		definition.setExplanation("DecreasingNumbers.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -179,7 +179,7 @@ public class AppxUtil {
 		definition.setName("IncreaseDecreaseAlternate");
 		definition.setDescription("");
 		definition.setEncodedSeries("x, x1 + 5, x1 + n, x2 - n, x3 + n, x4 - n, x5 + n , x6 - n");
-		definition.setExplanation("Series is increasing and decreasing in alternate order");
+		definition.setExplanation("IncreaseDecreaseAlternate.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -190,7 +190,7 @@ public class AppxUtil {
 		definition.setName("DecreaseSteps");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 - n , x2 - 2 * n , x3 - n , x4 - 2 *n , x5 - n , x6 - 2 * n ");
-		definition.setExplanation("Decreasing in steps");
+		definition.setExplanation("DecreaseSteps.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -201,7 +201,7 @@ public class AppxUtil {
 		definition.setName("StepDecreaseSameNeighbour");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 , x2 - n , x2 - n , x3 - n , x3 - n , x5 - n , x5 -n ");
-		definition.setExplanation("DecreasingWithSameNeighbour");
+		definition.setExplanation("StepDecreaseSameNeighbour.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -212,7 +212,7 @@ public class AppxUtil {
 		definition.setName("AlternateSameIncreasing");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 + n , x1 , x2 + n , x1 , x4 + n , x1");
-		definition.setExplanation("Alternate numbers are same and are in increasing order");
+		definition.setExplanation("AlternateSameIncreasing.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -223,7 +223,7 @@ public class AppxUtil {
 		definition.setName("AlternateDecreasing");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 - n , x2 - 2 * n , x3 - n , x4 - 2 * n , x5 - n ");
-		definition.setExplanation("Alternate numbers in decreasing order");
+		definition.setExplanation("AlternateDecreasing.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -234,7 +234,7 @@ public class AppxUtil {
 		definition.setName("AlternateDouble");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 * n , x1 + 7 , x3 * n , x3 + 7 , x5 * n");
-		definition.setExplanation("Alternate increase as per pattern");
+		definition.setExplanation("AlternateDouble.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -245,7 +245,7 @@ public class AppxUtil {
 		definition.setName("DiffNextNumber");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , n , x1 + x2 , n * 2 , x3 + x4 , n * 3, x5 + x6 , n * 4  ");
-		definition.setExplanation("Difference is next number.");
+		definition.setExplanation("DiffNextNumber.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -257,7 +257,7 @@ public class AppxUtil {
 		definition.setName("MultOfPrevious");
 		definition.setDescription("");
 		definition.setEncodedSeries("x , x1 * x1 , x1 * x2 , x2 * x3 , x3 * x4 , x4 * x5 ");
-		definition.setExplanation("Number is multiple of previous number");
+		definition.setExplanation("MultOfPrevious.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 
@@ -268,7 +268,7 @@ public class AppxUtil {
 		definition.setName("SumOfPrevious");
 		definition.setDescription("");
 		definition.setEncodedSeries(" , x1 + x1 , x1 + x2 , x2 + x3 , x3 + x4 , x4 + x5 ");
-		definition.setExplanation("Number is sum of previous numbres");
+		definition.setExplanation("SumOfPrevious.MESSAGE");
 		definition.setLevel(1);
 		definition.setStartNumber("1");
 

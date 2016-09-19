@@ -18,7 +18,9 @@ public class SeriesTO implements Serializable {
 
 	private String options;
 
-	private SeriesDefinitionTO defintion;
+	private Long definitionId;
+	
+	private String explanation;
 
 	/**
 	 * @return the id
@@ -104,20 +106,35 @@ public class SeriesTO implements Serializable {
 		this.options = options;
 	}
 
+	
 	/**
-	 * @return the defintion
+	 * @return the definitionId
 	 */
-	public SeriesDefinitionTO getDefintion() {
-		return defintion;
+	public Long getDefinitionId() {
+		return definitionId;
 	}
 
 	/**
-	 * @param defintion the defintion to set
+	 * @param definitionId the definitionId to set
 	 */
-	public void setDefintion(SeriesDefinitionTO defintion) {
-		this.defintion = defintion;
+	public void setDefinitionId(Long definitionId) {
+		this.definitionId = definitionId;
 	}
-	
+
+	/**
+	 * @return the explanation
+	 */
+	public String getExplanation() {
+		return explanation;
+	}
+
+	/**
+	 * @param explanation the explanation to set
+	 */
+	public void setExplanation(String explanation) {
+		this.explanation = explanation;
+	}
+
 	@Override
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);

@@ -3,9 +3,9 @@
  */
 package com.appx.work.service;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.appx.work.common.AppConstants;
+import com.appx.work.common.AppxMessages;
 import com.appx.work.domain.Series;
 import com.appx.work.domain.SeriesDefinition;
 import com.appx.work.repository.SeriesDefinitionRepository;
@@ -78,9 +79,13 @@ public class AppxServiceImpl implements AppxService {
 	public SeriesTO getSeries(Long id) {
 		SeriesTO sto = new SeriesTO();
 		Series series = seriesRepo.findOne(id);
-		sto.setDefintion(new SeriesDefinitionTO());
+		
 		BeanUtils.copyProperties(series, sto);
-		// BeanUtils.copyProperties(series.getDefintion().getId(),sto.getDefintion().getId());
+		
+		SeriesDefinition sd = definitionRepo.findOne(series.getDefintionId());
+		String explanation = sd.getExplanation();
+		sto.setExplanation(AppxMessages.getString(explanation, series.getStart(),series.getIncrement()));	
+		sto.setDefinitionId(sd.getId());
 		return sto;
 	}
 
