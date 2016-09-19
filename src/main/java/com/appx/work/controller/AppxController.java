@@ -41,4 +41,16 @@ public class AppxController {
 		return ids.toString();
 	}
 
+	@RequestMapping(value = "/seedAndLoad", method = RequestMethod.GET)
+	public String seedAndLoadData() {
+
+		AppxUtil.service = service;
+
+		AppxUtil.loadDefinitions();
+		
+		List<Long> ids = AppxUtil.loadData();
+
+		return ids.toString();
+	}
+
 }
