@@ -116,8 +116,12 @@ public class AppxServiceImpl implements AppxService {
 	@Override
 	public SeriesDefinitionTO getSeriesDefinitionByName(String name) {
 		SeriesDefinitionTO sto = new SeriesDefinitionTO();
-		BeanUtils.copyProperties(definitionRepo.findByName(name), sto);
-		return sto;
+		SeriesDefinition defn = definitionRepo.findByName(name);
+		if ( defn != null ){
+			BeanUtils.copyProperties(definitionRepo.findByName(name), sto);
+			return sto;
+		}
+		return null;
 	}
 
 	@Override

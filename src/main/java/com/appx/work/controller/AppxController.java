@@ -26,7 +26,7 @@ public class AppxController {
 
 		AppxUtil.service = service;
 
-		List<Long> ids = AppxUtil.loadDefinitions();
+		List<Long> ids = AppxUtil.loadDefinitionsFromFile(); //.loadDefinitions();
 
 		return ids.toString();
 	}

@@ -37,6 +37,10 @@ public class AppxUtil {
 
 		for (Iterator iterator = exprList.iterator(); iterator.hasNext();) {
 			String line = (String) iterator.next();
+			
+			if ( line.startsWith("#")){
+				continue;
+			}
 
 			String[] cols = line.split(",");
 
@@ -52,7 +56,7 @@ public class AppxUtil {
 			expression = expression.substring(0, expression.lastIndexOf(","));
 
 			System.out.println(name + ":" + startNum + ":" + increment + ":" + expression);
-			
+
 			SeriesDefinition definition = new SeriesDefinition();
 
 			definition.setName(name);
@@ -64,7 +68,7 @@ public class AppxUtil {
 			definition.setIncrement(Integer.parseInt(increment));
 
 			definition = service.saveDefinition(definition);
-			
+
 			definitionIdList.add(definition.getId());
 
 		}
@@ -283,33 +287,56 @@ public class AppxUtil {
 	public static List<Long> loadData() {
 
 		List<Long> result = new ArrayList<Long>();
+		Integer[] nArray = { 1, 3, 5, 7, 9, 11 };
 
-		multipleLoads(service.getSeriesDefinitionByName("IncrementWithOne"),
-				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, new Integer[] { 1 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("SquareSeries"),
+		multipleLoads(service.getSeriesDefinitionByName("IncrementWithN"),
+				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("DecrementWithN"),
+				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("Square"),
 				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("CubeSeries"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("SquareSeriesPlusN"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("SquareSeriesMinusN"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("SeriesMultiplyN"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("SquareWithIncrement"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("SquareWithDecrement"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("Cube"), new String[] { "2", "3", "4", "5", "6" },
+				new Integer[] { 1 }, result);
+		multipleLoads(service.getSeriesDefinitionByName("CubeWithIncrement"), new String[] { "2", "3", "4", "5", "6" },
+				nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("CubeWithDecrement"), new String[] { "2", "3", "4", "5", "6" },
+				nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("MultiplyByN"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("AlternateIncrease"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("AlternateDecreasing"),
-				new String[] { "100", "90", "80", "70", "60" }, new Integer[] { 1, 3, 5, 7, 9 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("AlternateIncrease"),
-				new String[] { "12", "32", "24", "45", "56", "37", "18", "92" }, new Integer[] { 1, 4, 6, 7 }, result);
-		multipleLoads(service.getSeriesDefinitionByName("DecreasingNumbers"),
-				new String[] { "100", "90", "80", "70", "60" }, new Integer[] { 1 }, result);
+				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("AlterenateDecrease"),
+				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("AlternateIncDecr"),
+				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("SameneighbourIncr"),
+				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("SameneighbourDecr"),
+				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("PlusMultiply"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("MinusMultiple"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("IncrementAndAdd"),
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("DecrementAndAdd"),
+				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
+		multipleLoads(service.getSeriesDefinitionByName("SumOfPrevious"),
+				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, nArray, result);
 
 		return result;
 	}
 
 	private static void multipleLoads(SeriesDefinitionTO definition, String[] startNumbers, Integer[] increments,
 			List<Long> result) {
+		
+		if ( definition == null ) {
+			return;
+		}
 
 		for (int i = 0; i < startNumbers.length; i++) {
 
@@ -323,9 +350,9 @@ public class AppxUtil {
 				List<Series> seriesList = service.saveSeries(defn, startNo, increment);
 				for (Iterator iterator = seriesList.iterator(); iterator.hasNext();) {
 					Series series = (Series) iterator.next();
-					result.add(series.getId());	
+					result.add(series.getId());
 				}
-				
+
 			}
 
 		}
