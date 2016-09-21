@@ -37,19 +37,22 @@ public class AppxUtil {
 
 		for (Iterator iterator = exprList.iterator(); iterator.hasNext();) {
 			String line = (String) iterator.next();
-			
-			if ( line.startsWith("#")){
+
+			if (line.startsWith("#")) {
 				continue;
 			}
 
 			String[] cols = line.split(",");
 
 			String name = cols[0];
-			String startNum = cols[1];
-			String increment = cols[2];
+			String explanation = cols[1];
+			String hint = cols[2];
+			String level = cols[3];
+			String startNum = cols[4];
+			String increment = cols[5];
 			String expression = "";
 
-			for (int i = 3; i < cols.length; i++) {
+			for (int i = 6; i < cols.length; i++) {
 				expression = expression + cols[i] + ",";
 			}
 
@@ -62,8 +65,9 @@ public class AppxUtil {
 			definition.setName(name);
 			definition.setDescription(name + " description");
 			definition.setEncodedSeries(expression);
-			definition.setExplanation(name + "  Explanation");
-			definition.setLevel(1);
+			definition.setExplanation(explanation);
+			definition.setHint(hint);
+			definition.setLevel(Integer.parseInt(level));
 			definition.setStartNumber(startNum);
 			definition.setIncrement(Integer.parseInt(increment));
 
@@ -333,8 +337,8 @@ public class AppxUtil {
 
 	private static void multipleLoads(SeriesDefinitionTO definition, String[] startNumbers, Integer[] increments,
 			List<Long> result) {
-		
-		if ( definition == null ) {
+
+		if (definition == null) {
 			return;
 		}
 
@@ -388,6 +392,35 @@ public class AppxUtil {
 
 		return list;
 
+	}
+
+	// TODO Provide randomized options
+
+	public static String getRandomOptions(String options) {
+
+		if (options.contains(",")) {
+			String[] array = options.split(",");
+
+		}
+		return options;
+
+	}
+
+	// TODO Strip last character of string
+
+	public static String stripCharacter(String input, String charToStrip) {
+
+		return input;
+
+	}
+
+	public static int calculateHash(String... args) {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < args.length; i++) {
+			sb.append(args[i]);
+		}
+
+		return sb.toString().hashCode();
 	}
 
 }

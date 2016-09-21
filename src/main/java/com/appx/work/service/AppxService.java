@@ -26,9 +26,12 @@ public interface AppxService {
 
 	SeriesTO getSeries(Long id);
 	
-	 List<SeriesTO> getAllSeries();
-	 
-	 public SeriesDefinition createSeriesDefinition(SeriesDefinition defn);
+	List<SeriesTO> getAllSeries();
+
+	Series getNextSeries(String name,int level,String sessionId);
+	
+	
+	public SeriesDefinition createSeriesDefinition(SeriesDefinition defn);
 
 	public SeriesDefinition updateSeriesDefinition(SeriesDefinition defn);
 

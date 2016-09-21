@@ -34,7 +34,6 @@ public class SeriesController {
 
 	@RequestMapping(method = RequestMethod.PATCH)
 	public Series update(@RequestBody Series series) {
-
 		return service.udpateSeries(series);
 	}
 
@@ -53,6 +52,11 @@ public class SeriesController {
 	public List<SeriesTO> getAllSeries() {
 		return service.getAllSeries();
 
+	}
+
+	@RequestMapping(value = "/next/{name}/{level}", method = RequestMethod.GET)
+	public Series createSeries(@PathVariable("name") String name, @PathVariable("level") int level) {
+		return service.getNextSeries(name, level, "");
 	}
 
 	@RequestMapping(value = "/defn/{defId}/{start}/{increment}", method = RequestMethod.GET)

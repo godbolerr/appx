@@ -44,7 +44,10 @@ public class Series extends BaseEntity {
 	private String options;
 
 	private Long defintionId;
+	
+	int hashValue;
 
+	int level;
 	/**
 	 * @return the id
 	 */
@@ -155,4 +158,34 @@ public class Series extends BaseEntity {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
+	/**
+	 * @return the hashValue
+	 */
+	public int getHashValue() {
+		return series.hashCode();
+	}
+
+	/**
+	 * @param hashValue the hashValue to set
+	 */
+	public void setHashValue(int hashValue) {
+		this.hashValue = hashValue;
+	}
+
+	/**
+	 * @return the level
+	 */
+	public int getLevel() {
+		return level;
+	}
+
+	/**
+	 * @param level the level to set
+	 */
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	
+	
 }

@@ -1,20 +1,20 @@
-#Name,Start,Inc,First,Second,Third,Fourth,Fifth,Sixth,Seventh
-IncrementWithN,1,1,x1, x1+n,x2+n,x3+n,x4+n,x5+n,x6+n
-DecrementWithN,100,1,x1,x1-n,x2-n,x3-n,x4-n,x5-n,x6-n
-Square,1,1,x * x ,(x+1)*(x+1),(x+2)*(x+2),(x+3)*(x+3),(x+4)*(x+4),(x+5)*(x+5),(x+6)*(x+6)
-SquareWithIncrement,1,1,x * x  + n,(x+1)*(x+1)  + n,(x+2)*(x+2) + n ,(x+3)*(x+3) + n,(x+4)*(x+4) + n,(x+5)*(x+5) + n,(x+6)*(x+6) + n
-SquareWithDecrement,1,1,x * x  - n,(x+1)*(x+1)  - n,(x+2)*(x+2) - n ,(x+3)*(x+3) - n,(x+4)*(x+4) - n,(x+5)*(x+5) - n,(x+6)*(x+6) - n
-Cube,1,1,x * x * x,(x+1)*(x+1) * (x+1),(x+2)*(x+2)*(x+2),(x+3)*(x+3)*(x+3),(x+4)*(x+4)*(x+4),(x+5)*(x+5)*(x+5),(x+6)*(x+6)*(x+6)
-CubeWithIncrement,1,1,x * x * x + n,(x+1)*(x+1) * (x+1) + n,(x+2)*(x+2)*(x+2) + n,(x+3)*(x+3)*(x+3) + n,(x+4)*(x+4)*(x+4) + n,(x+5)*(x+5)*(x+5) + n,(x+6)*(x+6)*(x+6) + n
-CubeWithDecrement,1,1,x * x * x - n,(x+1)*(x+1) * (x+1) - n,(x+2)*(x+2)*(x+2) - n,(x+3)*(x+3)*(x+3) - n,(x+4)*(x+4)*(x+4) - n,(x+5)*(x+5)*(x+5) - n,(x+6)*(x+6)*(x+6) - n
-MultiplyByN,1,2,x1*n,(x+1) * n,(x+2) * n,(x+3) * n,(x+4) * n,(x + 5 ) * n,(x + 6 ) * n
-AlternateIncrease,1,1,x,x+5+n,x1+n,x2+n,x3+n,x4+n,x5+n
-AlterenateDecrease,100,1,x,x-5-n,x1-n,x2-n,x3-n,x4-n,x5-n
-AlternateIncDecr,10,1,x,x+100-n,x1+n,x2-n,x3+n,x4-n,x5+n
-SameneighbourIncr,10,1,x,x1,x2+n,x2+n,x3+n,x3+n,x4+n
-SameneighbourDecr,50,1,x,x1,x2-n,x2-n,x3-n,x3-n,x4-n
-PlusMultiply,3,1,x,(x+1) + n ,(x+2) * n,(x+3) + n,(x+4) * n,(x+5) + n,(x+6) * n
-MinusMultiple,20,1,x,(x+1) - n ,(x+2) * n,(x+3) - n,(x+4) * n,(x+5) - n,(x+6) * n
-IncrementAndAdd,2,1,x,n,x1+x2,n+1,x3 + x4,n+2,x5+x6
-DecrementAndAdd,34,1,x,n,x1-x2,n+1,x3 - x4,n+2,x5-x6
-SumOfPrevious,10,1,x,x1+x1,x2+x1,x3+x2,x4+x3,x5+x4,x6+x5
+#Name,Explanation,Hint,Level,Start,Inc,First,Second,Third,Fourth,Fifth,Sixth,Seventh
+IncrementWithN,,Increment,1,1,1,x1, x1+n,x2+n,x3+n,x4+n,x5+n,x6+n
+DecrementWithN,,Decrement,1,100,1,x1,x1-n,x2-n,x3-n,x4-n,x5-n,x6-n
+Square,,Square,2,1,1,x * x ,(x+1)*(x+1),(x+2)*(x+2),(x+3)*(x+3),(x+4)*(x+4),(x+5)*(x+5),(x+6)*(x+6)
+SquareWithIncrement,,Square and Increasing,3,1,1,x * x  + n,(x+1)*(x+1)  + n,(x+2)*(x+2) + n ,(x+3)*(x+3) + n,(x+4)*(x+4) + n,(x+5)*(x+5) + n,(x+6)*(x+6) + n
+SquareWithDecrement,,Square and Decreasing,3,1,1,x * x  - n,(x+1)*(x+1)  - n,(x+2)*(x+2) - n ,(x+3)*(x+3) - n,(x+4)*(x+4) - n,(x+5)*(x+5) - n,(x+6)*(x+6) - n
+Cube,,Cube,3,1,1,x * x * x,(x+1)*(x+1) * (x+1),(x+2)*(x+2)*(x+2),(x+3)*(x+3)*(x+3),(x+4)*(x+4)*(x+4),(x+5)*(x+5)*(x+5),(x+6)*(x+6)*(x+6)
+CubeWithIncrement,,Cube Increasing,4,1,1,x * x * x + n,(x+1)*(x+1) * (x+1) + n,(x+2)*(x+2)*(x+2) + n,(x+3)*(x+3)*(x+3) + n,(x+4)*(x+4)*(x+4) + n,(x+5)*(x+5)*(x+5) + n,(x+6)*(x+6)*(x+6) + n
+CubeWithDecrement,,Cube Decreasing,5,1,1,x * x * x - n,(x+1)*(x+1) * (x+1) - n,(x+2)*(x+2)*(x+2) - n,(x+3)*(x+3)*(x+3) - n,(x+4)*(x+4)*(x+4) - n,(x+5)*(x+5)*(x+5) - n,(x+6)*(x+6)*(x+6) - n
+MultiplyByN,,Multiply,3,1,2,x1*n,(x+1) * n,(x+2) * n,(x+3) * n,(x+4) * n,(x + 5 ) * n,(x + 6 ) * n
+AlternateIncrease,,Alternate,2,1,1,x,x+5+n,x1+n,x2+n,x3+n,x4+n,x5+n
+AlterenateDecrease,,Alternate Decrease,3,100,1,x,x-5-n,x1-n,x2-n,x3-n,x4-n,x5-n
+AlternateIncDecr,,Alternate Increase and Decrease,4,10,1,x,x+100-n,x1+n,x2-n,x3+n,x4-n,x5+n
+SameneighbourIncr,,Neighbours,2,10,1,x,x1,x2+n,x2+n,x3+n,x3+n,x4+n
+SameneighbourDecr,,Neighbours,2,50,1,x,x1,x2-n,x2-n,x3-n,x3-n,x4-n
+PlusMultiply,,Multiply,5,3,1,x,(x+1) + n ,(x+2) * n,(x+3) + n,(x+4) * n,(x+5) + n,(x+6) * n
+MinusMultiple,,Negative Multiply,5,20,1,x,(x+1) - n ,(x+2) * n,(x+3) - n,(x+4) * n,(x+5) - n,(x+6) * n
+IncrementAndAdd,,Increment,3,2,1,x,n,x1+x2,n+1,x3 + x4,n+2,x5+x6
+DecrementAndAdd,,Decrement,3,34,1,x,n,x1-x2,n+1,x3 - x4,n+2,x5-x6
+SumOfPrevious,,Sum,3,10,1,x,x1+x1,x2+x1,x3+x2,x4+x3,x5+x4,x6+x5

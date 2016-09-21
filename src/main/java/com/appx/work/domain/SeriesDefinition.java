@@ -38,6 +38,9 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	@Size(max = 100)
 	private String name;
 
+	
+	
+	
 	/**
 	 * Each rule has description Multi-lingual
 	 */
@@ -84,6 +87,8 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * Increment defined for the expression
 	 */
 	int increment = 1;
+	
+	String hint;
 
 	public SeriesDefinition() {
 	}
@@ -250,4 +255,19 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
+	/**
+	 * @return the hint
+	 */
+	public String getHint() {
+		return hint;
+	}
+
+	/**
+	 * @param hint the hint to set
+	 */
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
+	
 }

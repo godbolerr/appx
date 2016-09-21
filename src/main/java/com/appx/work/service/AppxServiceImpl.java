@@ -9,11 +9,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.jexl3.JexlBuilder;
 import org.apache.commons.jexl3.JexlEngine;
 import org.apache.commons.jexl3.JexlScript;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -262,6 +264,8 @@ public class AppxServiceImpl implements AppxService {
 
 			series.setDefintionId(defn.getId());
 
+			
+			
 			seriesRepo.save(series);
 		}
 
@@ -371,6 +375,35 @@ public class AppxServiceImpl implements AppxService {
 
 		return seriesList;
 
+	}
+
+	@Override
+	public Series getNextSeries(String name, int level, String sessionId) {
+		
+		SeriesDefinition sd = definitionRepo.findByName(name);
+		
+		Series series = new Series();
+		
+		// Default to 1;
+		
+		Long defId=1l;
+		
+		if ( sd != null ) {
+			defId = sd.getId();
+		}
+		
+		List<Series> seriesList = seriesRepo.findByDefintionIdAndLevel(defId,level);
+		
+		if ( seriesList != null ){
+			int size = seriesList.size();
+			
+			int random = RandomUtils.nextInt(size);
+			
+			series =  seriesList.get(random);
+		}
+		
+		return series;
+		
 	}
 
 }
