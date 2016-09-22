@@ -447,7 +447,7 @@ public class RuleServiceTest extends Assert {
 
 		SeriesDefinition def = new SeriesDefinition();
 		def.setStartNumber("100.5");
-		def.setIncrement("3");
+		def.setIncrement("3.33");
 		def.setEncodedSeries("x , n,  x - n , n * 2 , x - x4 , n * 3 , x - x6 ");
 
 		String result = appxService.generate(def);
@@ -456,7 +456,7 @@ public class RuleServiceTest extends Assert {
 		
 		System.out.println("### " +result);
 
-		assertTrue("100.5,3,97.5,6,94.5,9,91.5".equals(result));
+		assertTrue("100.5,3.33,97.17,6.66,93.84,9.99,90.51".equals(result));
 	}
 	
 	@Test
