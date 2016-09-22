@@ -201,7 +201,7 @@ public class RuleServiceTest extends Assert {
 		
 		System.out.println(result);
 
-		assertTrue("0.8,3.8,8.8,15.8,24.8,35.8".equals(result));
+		assertTrue("0.2,0.4,0.6,0.8,1.0,1.2".equals(result));
 	}
 	
 	
@@ -456,8 +456,25 @@ public class RuleServiceTest extends Assert {
 		
 		System.out.println("### " +result);
 
-		assertTrue("100,3,97,6,94,9,91".equals(result));
+		assertTrue("100.5,3,97.5,6,94.5,9,91.5".equals(result));
 	}
+	
+	@Test
+	public void substractNFromBaseFractionAndIncrementFraction() {
+
+		SeriesDefinition def = new SeriesDefinition();
+		def.setStartNumber("100.5");
+		def.setIncrement("3");
+		def.setEncodedSeries("x , n,  x - n , n * 2 , x - x4 , n * 3 , x - x6 ");
+
+		String result = appxService.generate(def);
+		LOGGER.debug(result);
+		assertTrue(result != null);
+		
+		System.out.println("### " +result);
+
+		assertTrue("100.5,3,97.5,6,94.5,9,91.5".equals(result));
+	}	
 
 	// TODO Identify Pair
 	// TODO Roman
