@@ -86,7 +86,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	/**
 	 * Increment defined for the expression
 	 */
-	int increment = 1;
+	String increment = "1";
 	
 	String hint;
 
@@ -238,7 +238,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	/**
 	 * @return the increment
 	 */
-	public int getIncrement() {
+	public String getIncrement() {
 		return increment;
 	}
 
@@ -246,7 +246,7 @@ public class SeriesDefinition extends BaseEntity implements Serializable {
 	 * @param increment
 	 *            the increment to set
 	 */
-	public void setIncrement(int increment) {
+	public void setIncrement(String increment) {
 		this.increment = increment;
 	}
 

@@ -3,13 +3,13 @@
  */
 package com.appx.work.service;
 
-import java.text.MessageFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 import org.apache.commons.jexl3.JexlBuilder;
@@ -198,17 +198,36 @@ public class AppxServiceImpl implements AppxService {
 
 		String result = new String();
 
-		String startNumber = definition.getStartNumber();
+		String sStartNumber = definition.getStartNumber();
 
+		Object startNumber = null;
+		
 		Map<String, Object> sourceData = new HashMap<String, Object>();
 
-		if (startNumber != null) {
+		if (sStartNumber != null) {
 
 			for (int j = 1; j <= 9; j++) {
 				sourceData.put("x" + j, "");
 			}
 
-			sourceData.put("n", definition.getIncrement());
+			String sIncr = "" + definition.getIncrement();
+			Object incr = null;
+			
+			if ( sIncr.contains(".")) {
+				incr = new Double(sIncr);
+			} else {
+				incr = new Integer(sIncr);
+			}
+			
+			if ( sStartNumber.contains(".")) {
+				startNumber = new Double(sStartNumber);
+			} else {
+				startNumber = new Integer(sStartNumber);
+			}
+			
+			
+			
+			sourceData.put("n", incr);
 
 			String rule = definition.getEncodedSeries();
 
@@ -224,19 +243,24 @@ public class AppxServiceImpl implements AppxService {
 
 			rule = sb.toString();
 			rule = rule.replaceAll("[a-z][0-9]*", "s.$0");
-			sourceData.put("x", Integer.parseInt(startNumber));
-			sourceData.put("x1", Integer.parseInt(startNumber));
+			sourceData.put("x", startNumber);
+			sourceData.put("x1",startNumber);
 			EnhancedContext jexlContext = new EnhancedContext(funcs);
 			jexlContext.set(AppConstants.SCHEMA_TYPE_SOURCE, sourceData);
 			JexlScript e = jexl.createScript(rule);
 			e.execute(jexlContext);
+			
 			LOGGER.debug(rule + ": " + sourceData.toString());
 
 			String series = "";
 			for (int j = 1; j <= rArray.length; j++) {
 
-				Integer value = (Integer) sourceData.get("x" + j);
+				Object value = (Object) sourceData.get("x" + j);
 
+				if ( value instanceof Double ){
+					value = new BigDecimal(value.toString()).setScale(2,RoundingMode.HALF_UP).doubleValue() ;
+				}
+				
 				series = series + value + ",";
 			}
 			result = series.substring(0, series.lastIndexOf(","));
@@ -290,7 +314,7 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public List<String> generate(SeriesDefinition definition, List<String> startNos, int increment) {
+	public List<String> generate(SeriesDefinition definition, List<String> startNos, String increment) {
 
 		List<String> generatedSeries = new ArrayList<String>();
 
@@ -305,14 +329,14 @@ public class AppxServiceImpl implements AppxService {
 	}
 
 	@Override
-	public String generate(SeriesDefinition definition, String startNo, int increment) {
+	public String generate(SeriesDefinition definition, String startNo, String increment) {
 		definition.setStartNumber(startNo);
 		definition.setIncrement(increment);
 		return generate(definition);
 	}
 
 	@Override
-	public List<Series> saveSeries(SeriesDefinition definition, String startNo, int increment) {
+	public List<Series> saveSeries(SeriesDefinition definition, String startNo, String increment) {
 
 		definition.setStartNumber(startNo);
 		definition.setIncrement(increment);
@@ -332,7 +356,7 @@ public class AppxServiceImpl implements AppxService {
 
 	@Override
 	public List<Series> saveSeries(SeriesDefinition definition, String startNo) {
-		return saveSeries(definition, startNo, 1);
+		return saveSeries(definition, startNo, "1");
 	}
 
 	private List<Series> getSeriesList(String sequence, String startNo, String increment) {
@@ -377,6 +401,8 @@ public class AppxServiceImpl implements AppxService {
 
 	}
 
+	//TODO How to get random or just one record from the database based on the list selection.
+	
 	@Override
 	public Series getNextSeries(String name, int level, String sessionId) {
 		

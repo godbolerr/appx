@@ -50,13 +50,13 @@ public interface AppxService {
 	
 	public List<String> generate(SeriesDefinition definition,List<String> startNos);
 	
-	public String generate(SeriesDefinition definition,String startNo,int increment);
+	public String generate(SeriesDefinition definition,String startNo,String increment);
 	
-	public List<String> generate(SeriesDefinition definition,List<String> startNos,int increment);
+	public List<String> generate(SeriesDefinition definition,List<String> startNos,String increment);
 	
 	public List<Series> saveSeries(SeriesDefinition definition,String startNo);
 	
-	public List<Series> saveSeries(SeriesDefinition definition,String startNo,int increment);
+	public List<Series> saveSeries(SeriesDefinition definition,String startNo,String increment);
 	
 	// Finder methods
 	

@@ -61,7 +61,7 @@ public class SeriesController {
 
 	@RequestMapping(value = "/defn/{defId}/{start}/{increment}", method = RequestMethod.GET)
 	public List<Series> createSeries(@PathVariable("defId") Long defId, @PathVariable("start") int start,
-			@PathVariable("increment") int increment) {
+			@PathVariable("increment") String increment) {
 
 		List<Series> seriesList = null;
 

@@ -69,7 +69,7 @@ public class AppxUtil {
 			definition.setHint(hint);
 			definition.setLevel(Integer.parseInt(level));
 			definition.setStartNumber(startNum);
-			definition.setIncrement(Integer.parseInt(increment));
+			definition.setIncrement(increment);
 
 			definition = service.saveDefinition(definition);
 
@@ -291,20 +291,20 @@ public class AppxUtil {
 	public static List<Long> loadData() {
 
 		List<Long> result = new ArrayList<Long>();
-		Integer[] nArray = { 1, 3, 5, 7, 9, 11 };
+		String[] nArray = { "1", "3", "5", "7", "9", "11" };
 
 		multipleLoads(service.getSeriesDefinitionByName("IncrementWithN"),
 				new String[] { "3", "7", "9", "21", "27", "91", "101", "103" }, nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("DecrementWithN"),
 				new String[] { "100", "90", "80", "70", "60", "50" }, nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("Square"),
-				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new Integer[] { 1 }, result);
+				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, new String[] { "1" }, result);
 		multipleLoads(service.getSeriesDefinitionByName("SquareWithIncrement"),
 				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("SquareWithDecrement"),
 				new String[] { "2", "3", "4", "5", "6", "7", "8", "9" }, nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("Cube"), new String[] { "2", "3", "4", "5", "6" },
-				new Integer[] { 1 }, result);
+				new String[] { "1" }, result);
 		multipleLoads(service.getSeriesDefinitionByName("CubeWithIncrement"), new String[] { "2", "3", "4", "5", "6" },
 				nArray, result);
 		multipleLoads(service.getSeriesDefinitionByName("CubeWithDecrement"), new String[] { "2", "3", "4", "5", "6" },
@@ -335,7 +335,7 @@ public class AppxUtil {
 		return result;
 	}
 
-	private static void multipleLoads(SeriesDefinitionTO definition, String[] startNumbers, Integer[] increments,
+	private static void multipleLoads(SeriesDefinitionTO definition, String[] startNumbers, String[] increments,
 			List<Long> result) {
 
 		if (definition == null) {
@@ -347,7 +347,7 @@ public class AppxUtil {
 			String startNo = startNumbers[i];
 
 			for (int j = 0; j < increments.length; j++) {
-				int increment = increments[j];
+				String increment = ""+increments[j];
 
 				SeriesDefinition defn = new SeriesDefinition();
 				BeanUtils.copyProperties(definition, defn);
