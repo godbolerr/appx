@@ -36,7 +36,7 @@ public class AppxController {
 
 		AppxUtil.service = service;
 		
-		System.out.println("Test load again");
+		System.out.println("Test load again for the first time.");
 
 		List<Long> ids = AppxUtil.loadData();
 
