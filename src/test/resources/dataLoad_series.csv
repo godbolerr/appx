@@ -1,0 +1,14 @@
+IncrementWithOne,x1, x1+n , x2+n, x3+n, x4+n, x5+n,x6+n
+SquareSeries,x1*x1 , (x+1) * (x+1) , (x+2) * (x+2) , (x+3) * (x+3) , (x+4) * (x+4) , (x+5) * (x+5), (x+6) * ( x+6)
+CubeSeries,x1*x1*x1, (x+1) * (x+1) * (x+1) , (x+2) * (x+2) * (x+2) , (x+3) * (x+3) * (x+3), (x+4) * (x+4) * (x+4), (x+5) * (x+5)* (x+5), (x+6) * (x+6)* (x+6)
+SquareSeriesPlusN,x1*x1 +n , (x+1) * (x+1) +n , (x+2) * (x+2) + n , (x+3) * (x+3) +n , (x+4) * (x+4) +n  , (x+5) * (x+5) +n , (x+6) * (x+6) +n
+SquareSeriesMinusN,x*x -n , (x+1) * (x+1) - n , (x+2) * (x+2) - n , (x+3) * (x+3) - n , (x+4) * (x+4) - n  , (x+5) * (x+5) - n, (x+6) * (x+6) - n
+SeriesMultiplyN,x * n , (x+1) *  n , (x+2) *  n , (x+3) *  n , (x+4) *  n  , (x+5) * n, (x+6) * n
+AlternateIncrease,x, x + 5, x1 + n, x2 + n, x3 + n ,x4 + n,x5+n
+DecreasingNumbers,x, x1 -n , x2 -n , x3 - n , x4 -n , x5 - n, x6 - n
+IncreaseDecreaseAlternate,x, x1 + 5, x1 + n, x2 - n, x3 + n, x4 - n, x5 + n , x6 - n
+StepDecreaseSameNeighbour,x1 , x1  , x2 - n , x2 - n , x3 - n , x3 - n , x5 - n
+AlternateSameIncreasing,x , x1 + n , x1 , x2 + n , x1 , x4 + n , x1
+AlternateDecreasing,x , x1 - n , x2 - 2 * n , x3 - n , x4 - 2 * n , x5 - n, x6 - 2 * n
+DiffNextNumber,x , n , x1 + x2 , n * 2 , x3 + x4 , n * 3, x5 + x6 , n * 4
+SumOfPrevious,x, x1 + x1 , x1 + x2 , x2 + x3 , x3 + x4 , x4 + x5
