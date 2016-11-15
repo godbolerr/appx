@@ -15,7 +15,7 @@ public class GetSeriesTest extends Assert {
 		AppxUtil.loadDefinitions();
 	}
 
-	@Test
+	
 	public void IncrementWithN() {
 
 		SeriesDefinitionTO definition = new SeriesDefinitionTO();
@@ -35,7 +35,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void IncrementWithN1() {
 
 		SeriesDefinitionTO definition = new SeriesDefinitionTO();
@@ -57,7 +57,7 @@ public class GetSeriesTest extends Assert {
 
 	//
 
-	@Test
+	
 	public void DecrementWithN() {
 
 		String name = "DecrementWithN";
@@ -79,7 +79,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void DecrementWithN1() {
 
 		String name = "DecrementWithN";
@@ -103,7 +103,7 @@ public class GetSeriesTest extends Assert {
 
 	//
 
-	@Test
+	
 	public void Square() {
 
 		String name = "Square";
@@ -125,7 +125,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void Square1() {
 
 		String name = "Square";
@@ -151,7 +151,7 @@ public class GetSeriesTest extends Assert {
 
 	// SquareWithIncrement
 
-	@Test
+	
 	public void SquareWithIncrement() {
 
 		String name = "SquareWithIncrement";
@@ -175,7 +175,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void SquareWithIncrement1() {
 
 		String name = "SquareWithIncrement";
@@ -201,7 +201,7 @@ public class GetSeriesTest extends Assert {
 
 	// SquareWithDecrement
 
-	@Test
+	
 	public void SquareWithDecrement() {
 
 		String name = "SquareWithDecrement";
@@ -225,7 +225,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void SquareWithDecrement1() {
 
 		String name = "SquareWithDecrement";
@@ -249,7 +249,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void Cube() {
 
 		String name = "Cube";
@@ -273,7 +273,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void Cube1() {
 
 		String name = "Cube";
@@ -299,7 +299,7 @@ public class GetSeriesTest extends Assert {
 
 	// CubeWithIncrement
 
-	@Test
+	
 	public void CubeWithIncrement() {
 
 		String name = "CubeWithIncrement";
@@ -323,7 +323,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void CubeWithIncrement2() {
 
 		String name = "CubeWithIncrement";
@@ -351,7 +351,7 @@ public class GetSeriesTest extends Assert {
 	// - n,(x+3)*(x+3)*(x+3) - n,(x+4)*(x+4)*(x+4) - n,(x+5)*(x+5)*(x+5) -
 	// n,(x+6)*(x+6)*(x+6) - n
 
-	@Test
+	
 	public void CubeWithDecrement() {
 
 		String name = "CubeWithDecrement";
@@ -375,7 +375,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void CubeWithDecrement1() {
 
 		String name = "CubeWithDecrement";
@@ -401,7 +401,7 @@ public class GetSeriesTest extends Assert {
 
 	// MultiplyByN,x1*n,(x+1) * n,(x+2) * n,(x+3) * n,(x+4) * n,(x + 5 ) * n,(x
 	// + 6 ) * n
-	@Test
+	
 	public void MultiplyByN() {
 
 		String name = "MultiplyByN";
@@ -425,7 +425,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void MultiplyByN1() {
 
 		String name = "MultiplyByN";
@@ -451,7 +451,7 @@ public class GetSeriesTest extends Assert {
 
 	// AlternateIncrease,x,x+5+n,x1+n,x2+n,x3+n,x4+n,x5+n
 
-	@Test
+	
 	public void AlternateIncrease() {
 
 		String name = "AlternateIncrease";
@@ -475,7 +475,7 @@ public class GetSeriesTest extends Assert {
 
 	}
 
-	@Test
+	
 	public void AlternateIncrease1() {
 
 		String name = "AlternateIncrease";
@@ -501,7 +501,7 @@ public class GetSeriesTest extends Assert {
 
 	// AlterenateDecrease,x,x-5-n,x1-n,x2-n,x3-n,x4-n,x5-n
 
-	@Test
+	
 	public void AlterenateDecrease() {
 
 		String name = "AlterenateDecrease";
@@ -526,7 +526,7 @@ public class GetSeriesTest extends Assert {
 	}
 	// AlternateIncDecr,x,x+100-n,x1+n,x2-n,x3+n,x4-n,x5+n
 
-	@Test
+	
 	public void AlternateIncDecr() {
 
 		String name = "AlternateIncDecr";
@@ -552,7 +552,7 @@ public class GetSeriesTest extends Assert {
 
 	// SameneighbourIncr,x,x1,x2+n,x2+n,x3+n,x3+n,x4+n
 
-	@Test
+	
 	public void SameneighbourIncr() {
 
 		String name = "SameneighbourIncr";
@@ -577,7 +577,7 @@ public class GetSeriesTest extends Assert {
 	}
 
 	// SameneighbourDecr,x,x1,x2-n,x2-n,x3-n,x3-n,x4-n
-	@Test
+	
 	public void SameneighbourDecr() {
 
 		String name = "SameneighbourDecr";
@@ -604,7 +604,7 @@ public class GetSeriesTest extends Assert {
 	// PlusMultiply,x,(x+1) + n ,(x+2) * n,(x+3) + n,(x+4) * n,(x+5) + n,(x+6) *
 	// n
 
-	@Test
+	
 	public void PlusMultiply() {
 
 		String name = "PlusMultiply";
@@ -631,7 +631,7 @@ public class GetSeriesTest extends Assert {
 	// MinusMultiple,x,(x+1) - n ,(x+2) * n,(x+3) - n,(x+4) * n,(x+5) - n,(x+6)
 	// * n
 
-	@Test
+	
 	public void MinusMultiple() {
 
 		String name = "MinusMultiple";
@@ -657,7 +657,7 @@ public class GetSeriesTest extends Assert {
 
 	// IncrementAndAdd,x,n,x1+n,n+1,x3 + x4,n+2,x5+x6
 
-	@Test
+	
 	public void IncrementAndAdd() {
 
 		String name = "IncrementAndAdd";
@@ -683,7 +683,7 @@ public class GetSeriesTest extends Assert {
 
 	// DecrementAndAdd,x,n,x1-x2,n+1,x3 - x4,n+2,x5-x6
 
-	@Test
+	
 	public void DecrementAndAdd() {
 
 		String name = "DecrementAndAdd";
@@ -709,7 +709,7 @@ public class GetSeriesTest extends Assert {
 
 	// SumOfPrevious,x,x1,x2+x1,x3+x2,x4+x3,x5+x4,x6+x5
 
-	@Test
+	
 	public void SumOfPrevious() {
 
 		String name = "SumOfPrevious";
@@ -735,7 +735,7 @@ public class GetSeriesTest extends Assert {
 
 	// DecrementAndMultiply,x,x1 - n,x2 * n,x3 -n ,x4 * n,x5 - n ,x6 * n
 
-	@Test
+	
 	public void DecrementAndMultiply() {
 
 		String name = "DecrementAndMultiply";
@@ -761,7 +761,7 @@ public class GetSeriesTest extends Assert {
 
 	// IncrementAndMultiply,x,x1 + n,x2 * n,x3 + n,x4 * n,x5 + n,x6 * n
 
-	@Test
+	
 	public void IncrementAndMultiply() {
 
 		String name = "IncrementAndMultiply";
@@ -787,7 +787,7 @@ public class GetSeriesTest extends Assert {
 
 	// Kolakoski,x,x1+n,x1+n,x1+5,x4+n,x4+n,x4+5
 
-	@Test
+	
 	public void Kolakoski() {
 
 		String name = "Kolakoski";
@@ -813,7 +813,7 @@ public class GetSeriesTest extends Assert {
 
 	// TwoInSequence,x,x1,x1+n,x1+n,x3+n,x3+n,x5+n
 
-	@Test
+	
 	public void TwoInSequence() {
 
 		String name = "TwoInSequence";
@@ -839,7 +839,7 @@ public class GetSeriesTest extends Assert {
 
 	// DecreasingThree,x,x-n,x2-n,x,x -n ,x1-n,x
 
-	@Test
+	
 	public void DecreasingThree() {
 
 		String name = "DecreasingThree";
@@ -865,7 +865,7 @@ public class GetSeriesTest extends Assert {
 
 	// Tribonnaci,x,x1,x1+x2,x1+x2+x3,x2+x3+x4,x3+x4+x5,x4+x5+x6
 
-	@Test
+	
 	public void Tribonnaci() {
 
 		String name = "Tribonnaci";
@@ -891,7 +891,7 @@ public class GetSeriesTest extends Assert {
 
 	// ThreeInSequence,x,x,x,x+n,x+n,x+n,x+n+n
 
-	@Test
+	
 	public void ThreeInSequence() {
 
 		String name = "ThreeInSequence";
@@ -917,7 +917,7 @@ public class GetSeriesTest extends Assert {
 
 	// Factorial,x,x1*x1,x2*x1,x3*x2,x4*x3,x5*x4,x6*x5
 
-	@Test
+	
 	public void Factorial() {
 
 		String name = "Factorial";
@@ -943,7 +943,7 @@ public class GetSeriesTest extends Assert {
 
 	// TriangularNumbers,x*n*(n+1)/2,(x+1)*n*(n+1)/2,(x+2)*n*(n+1)/2,(x+3)*n*(n+1)/2,(x+4)*n*(n+1)/2,(x+5)*n*(n+1)/2,(x+6)*n*(n+1)/2
 
-	@Test
+	
 	public void TriangularNumbers() {
 
 		String name = "TriangularNumbers";
@@ -969,7 +969,7 @@ public class GetSeriesTest extends Assert {
 
 	// SameSameAdd,x,x,x1+x2,x+n,x+n,x4+x4,x4+n
 
-	@Test
+	
 	public void SameSameAdd() {
 
 		String name = "SameSameAdd";
@@ -995,7 +995,7 @@ public class GetSeriesTest extends Assert {
 
 	// DecreasingN,x,x-1-n,x-2-n,x-3-n,x-4-n,x-5-n,x-6-n
 
-	@Test
+	
 	public void DecreasingN() {
 
 		String name = "DecreasingN";
@@ -1021,7 +1021,7 @@ public class GetSeriesTest extends Assert {
 
 	// IncreasingN,x,x+1+n,x+2+n,x+3+n,x+4+n,x+5+n,x+6+n
 
-	@Test
+	
 	public void IncreasingN() {
 
 		String name = "IncreasingN";
@@ -1047,7 +1047,7 @@ public class GetSeriesTest extends Assert {
 
 	// PowerSeries,x,x*x,x2*x,x3*x ,x4*x ,x5*x ,x6*x
 
-	@Test
+	
 	public void PowerSeries() {
 
 		String name = "PowerSeries";
@@ -1073,7 +1073,7 @@ public class GetSeriesTest extends Assert {
 
 	// AddByDecimalPosition,x,x+10,x+100,x+1000,x+10000,x+100000,x+1000000
 
-	@Test
+	
 	public void AddByDecimalPosition() {
 
 		String name = "AddByDecimalPosition";
@@ -1099,7 +1099,7 @@ public class GetSeriesTest extends Assert {
 
 	// DiffSquareOfNPlusOne,x,x1+n*n,x2+(n+1)*(n+1),x3+(n+2)*(n+2),x3+(n+3)*(n+3),x3+(n+4)*(n+4),x3+(n+5)*(n+5)
 
-	@Test
+	
 	public void DiffSquareOfNPlusOne() {
 
 		String name = "DiffSquareOfNPlusOne";
@@ -1125,7 +1125,7 @@ public class GetSeriesTest extends Assert {
 
 	// Undulating,101,111,121,131,141,151,161
 
-	@Test
+	
 	public void Undulating() {
 
 		String name = "Undulating";
@@ -1151,7 +1151,7 @@ public class GetSeriesTest extends Assert {
 
 	// Prime,2,3,5,7,11,13,17
 
-	@Test
+	
 	public void Prime() {
 
 		String name = "Prime";
@@ -1177,7 +1177,7 @@ public class GetSeriesTest extends Assert {
 
 	// Prime1,19,23,29,31,37,41,47
 
-	@Test
+	
 	public void Prime1() {
 
 		String name = "Prime1";
