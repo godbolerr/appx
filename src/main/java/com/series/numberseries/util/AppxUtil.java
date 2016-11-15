@@ -33,9 +33,9 @@ public class AppxUtil {
 
 	public static final int TOTAL_QUESTIONS_IN_SESSION = 6;
 
-	public static List<SeriesDefinitionTO> defListSimple = new ArrayList<>();
-	public static List<SeriesDefinitionTO> defListMedium = new ArrayList<>();
-	public static List<SeriesDefinitionTO> defListComplex = new ArrayList<>();
+	public static List<SeriesDefinitionTO> defListSimple = new ArrayList<SeriesDefinitionTO>();
+	public static List<SeriesDefinitionTO> defListMedium = new ArrayList<SeriesDefinitionTO>();
+	public static List<SeriesDefinitionTO> defListComplex = new ArrayList<SeriesDefinitionTO>();
 
 	public static long currentSession;
 

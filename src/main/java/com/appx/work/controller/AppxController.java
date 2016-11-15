@@ -18,6 +18,8 @@ public class AppxController {
 
 	@Autowired
 	private AppxService service;
+	
+	private AppxService servic2;
 
 	static Logger logger = LoggerFactory.getLogger(AppxController.class);
 
