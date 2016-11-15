@@ -1,5 +1,7 @@
 package com.series.numberseries.util;
 
+// In pullone
+
 public class Answer {
 
     String value;
